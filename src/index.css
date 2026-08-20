@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *:focus-visible {
+    outline: 2px solid #6366F1;
+    outline-offset: 2px;
+  }
+}
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
+:root {
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%);
+  --gradient-brand-subtle: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.15) 0%,
+    rgba(139, 92, 246, 0.1) 50%,
+    rgba(6, 182, 212, 0.05) 100%
+  );
+  --gradient-text: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%);
+
+  /* Glass backgrounds */
+  --glass-weak-bg: rgba(13, 13, 20, 0.6);
+  --glass-medium-bg: rgba(13, 13, 20, 0.8);
+  --glass-strong-bg: rgba(5, 5, 8, 0.95);
+
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+  --shadow-glow-strong: 0 0 40px rgba(99, 102, 241, 0.5);
+}
+
+/* ─── Global Resets & Base ───────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #050508;
+  color: #F1F5F9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(99, 102, 241, 0.35);
+  color: #F1F5F9;
+}
+
+/* ─── Scrollbar (webkit) ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D0D14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.65);
+}
+
+/* ─── Utility Classes ───────────────────────────────────────────────────── */
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .glass-weak {
+    background: var(--glass-weak-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+  }
+
+  .glass-medium {
+    background: var(--glass-medium-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .glass-strong {
+    background: var(--glass-strong-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+  }
+
+  @keyframes grid-drift {
+    0%   { transform: translate(0, 0); }
+    50%  { transform: translate(-30px, -20px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  .animate-grid-drift {
+    animation: grid-drift 20s ease-in-out infinite;
+  }
+
+  @keyframes marquee-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+  }
+
+  .animate-marquee-left {
+    animation: marquee-left 30s linear infinite;
+  }
+
+  .animate-marquee-right {
+    animation: marquee-right 30s linear infinite;
+  }
+}
