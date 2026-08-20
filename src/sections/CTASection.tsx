@@ -23,8 +23,8 @@ export function CTASection() {
       aria-label="Call to action"
     >
       {/* Animated background orbs */}
-      <GlowOrb color="#6366F1" size={700} opacity={0.12} className="top-1/2 left-1/4 z-0" />
-      <GlowOrb color="#06B6D4" size={500} opacity={0.08} className="top-1/2 right-1/4 z-0" />
+      <GlowOrb color="#DC2626" size={700} opacity={0.12} className="top-1/2 left-1/4 z-0" />
+      <GlowOrb color="#F97316" size={500} opacity={0.08} className="top-1/2 right-1/4 z-0" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div

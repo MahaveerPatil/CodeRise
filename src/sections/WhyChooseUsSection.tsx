@@ -56,7 +56,7 @@ export function WhyChooseUsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <SectionHeading
-            label="WHY VELTRIX"
+            label="WHY VELTRICKS"
             title="Technology With [Purpose]."
             subtitle="We don't just build software. We build reliable, scalable technology that creates real business value."
             align="center"

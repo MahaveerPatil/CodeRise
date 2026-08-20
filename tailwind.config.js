@@ -5,27 +5,27 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#6366F1',
-          secondary: '#06B6D4',
-          accent: '#8B5CF6',
+          primary: '#DC2626',   // Crimson Red
+          secondary: '#F97316', // Ember Orange
+          accent: '#991B1B',    // Deep Wine Red
         },
         bg: {
-          base: '#050508',
-          surface: '#0D0D14',
-          elevated: '#12121C',
-          card: '#0F0F1A',
-          cardHover: '#141425',
+          base: '#080505',
+          surface: '#110A0A',
+          elevated: '#1A0E0E',
+          card: '#130909',
+          cardHover: '#1E1010',
         },
         text: {
-          primary: '#F1F5F9',
-          secondary: '#94A3B8',
-          muted: '#475569',
-          inverse: '#050508',
+          primary: '#F8F0F0',
+          secondary: '#B0928F',
+          muted: '#6B4C4C',
+          inverse: '#080505',
         },
         border: {
-          subtle: 'rgba(99, 102, 241, 0.12)',
-          default: 'rgba(99, 102, 241, 0.2)',
-          strong: 'rgba(99, 102, 241, 0.4)',
+          subtle: 'rgba(220, 38, 38, 0.12)',
+          default: 'rgba(220, 38, 38, 0.2)',
+          strong: 'rgba(220, 38, 38, 0.4)',
         },
         success: '#10B981',
         warning: '#F59E0B',
@@ -45,12 +45,12 @@ export default {
         '2xl': '1.5rem',
       },
       boxShadow: {
-        glow: '0 0 20px rgba(99, 102, 241, 0.3)',
-        'glow-strong': '0 0 40px rgba(99, 102, 241, 0.5)',
-        'glow-cyan': '0 0 20px rgba(6, 182, 212, 0.3)',
-        card: '0 4px 24px rgba(0, 0, 0, 0.4)',
-        'card-hover': '0 8px 40px rgba(99, 102, 241, 0.2)',
-        elevated: '0 20px 60px rgba(0, 0, 0, 0.6)',
+        glow: '0 0 20px rgba(220, 38, 38, 0.35)',
+        'glow-strong': '0 0 40px rgba(220, 38, 38, 0.55)',
+        'glow-orange': '0 0 20px rgba(249, 115, 22, 0.3)',
+        card: '0 4px 24px rgba(0, 0, 0, 0.5)',
+        'card-hover': '0 8px 40px rgba(220, 38, 38, 0.25)',
+        elevated: '0 20px 60px rgba(0, 0, 0, 0.7)',
       },
     },
   },

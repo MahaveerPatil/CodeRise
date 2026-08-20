@@ -1,30 +1,30 @@
 export const colors = {
-  // Brand
+  // Brand — Deep Red & Crimson
   brand: {
-    primary: '#6366F1',   // Indigo
-    secondary: '#06B6D4', // Cyan
-    accent: '#8B5CF6',    // Purple
+    primary: '#DC2626',   // Crimson Red
+    secondary: '#F97316', // Ember Orange
+    accent: '#991B1B',    // Deep Wine Red
   },
-  // Backgrounds
+  // Backgrounds (slightly warm dark)
   bg: {
-    base: '#050508',
-    surface: '#0D0D14',
-    elevated: '#12121C',
-    card: '#0F0F1A',
-    cardHover: '#141425',
+    base: '#080505',
+    surface: '#110A0A',
+    elevated: '#1A0E0E',
+    card: '#130909',
+    cardHover: '#1E1010',
   },
   // Text
   text: {
-    primary: '#F1F5F9',
-    secondary: '#94A3B8',
-    muted: '#475569',
-    inverse: '#050508',
+    primary: '#F8F0F0',
+    secondary: '#B0928F',
+    muted: '#6B4C4C',
+    inverse: '#080505',
   },
   // Border
   border: {
-    subtle: 'rgba(99, 102, 241, 0.12)',
-    default: 'rgba(99, 102, 241, 0.2)',
-    strong: 'rgba(99, 102, 241, 0.4)',
+    subtle: 'rgba(220, 38, 38, 0.12)',
+    default: 'rgba(220, 38, 38, 0.2)',
+    strong: 'rgba(220, 38, 38, 0.4)',
   },
   // Status
   success: '#10B981',
@@ -33,12 +33,12 @@ export const colors = {
 };
 
 export const gradients = {
-  brand: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%)',
+  brand: 'linear-gradient(135deg, #991B1B 0%, #DC2626 50%, #F97316 100%)',
   brandSubtle:
-    'linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(6,182,212,0.05) 100%)',
-  surface: 'linear-gradient(135deg, #0D0D14 0%, #12121C 100%)',
-  glow: 'radial-gradient(circle at center, rgba(99,102,241,0.15) 0%, transparent 70%)',
-  text: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%)',
+    'linear-gradient(135deg, rgba(153,27,27,0.15) 0%, rgba(220,38,38,0.1) 50%, rgba(249,115,22,0.05) 100%)',
+  surface: 'linear-gradient(135deg, #110A0A 0%, #1A0E0E 100%)',
+  glow: 'radial-gradient(circle at center, rgba(220,38,38,0.15) 0%, transparent 70%)',
+  text: 'linear-gradient(135deg, #DC2626 0%, #F97316 100%)',
 };
 
 export const typography = {
@@ -64,10 +64,10 @@ export const typography = {
 };
 
 export const spacing = {
-  section: '6rem',     // py-24
+  section: '6rem',
   sectionMd: '5rem',
   sectionSm: '4rem',
-  container: '80rem', // max-w-7xl
+  container: '80rem',
 };
 
 export const radii = {
@@ -81,28 +81,28 @@ export const radii = {
 };
 
 export const shadows = {
-  glow: '0 0 20px rgba(99, 102, 241, 0.3)',
-  glowStrong: '0 0 40px rgba(99, 102, 241, 0.5)',
-  glowCyan: '0 0 20px rgba(6, 182, 212, 0.3)',
-  card: '0 4px 24px rgba(0, 0, 0, 0.4)',
-  cardHover: '0 8px 40px rgba(99, 102, 241, 0.2)',
-  elevated: '0 20px 60px rgba(0, 0, 0, 0.6)',
+  glow: '0 0 20px rgba(220, 38, 38, 0.35)',
+  glowStrong: '0 0 40px rgba(220, 38, 38, 0.55)',
+  glowOrange: '0 0 20px rgba(249, 115, 22, 0.3)',
+  card: '0 4px 24px rgba(0, 0, 0, 0.5)',
+  cardHover: '0 8px 40px rgba(220, 38, 38, 0.25)',
+  elevated: '0 20px 60px rgba(0, 0, 0, 0.7)',
 };
 
 export const glass = {
   weak: {
-    background: 'rgba(13, 13, 20, 0.6)',
+    background: 'rgba(17, 10, 10, 0.6)',
     backdropFilter: 'blur(8px)',
-    border: '1px solid rgba(99, 102, 241, 0.12)',
+    border: '1px solid rgba(220, 38, 38, 0.12)',
   },
   medium: {
-    background: 'rgba(13, 13, 20, 0.8)',
+    background: 'rgba(17, 10, 10, 0.8)',
     backdropFilter: 'blur(16px)',
-    border: '1px solid rgba(99, 102, 241, 0.2)',
+    border: '1px solid rgba(220, 38, 38, 0.2)',
   },
   strong: {
-    background: 'rgba(5, 5, 8, 0.95)',
+    background: 'rgba(8, 5, 5, 0.95)',
     backdropFilter: 'blur(24px)',
-    border: '1px solid rgba(99, 102, 241, 0.3)',
+    border: '1px solid rgba(220, 38, 38, 0.3)',
   },
 };

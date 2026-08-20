@@ -36,9 +36,9 @@ function CaseStudyPage() {
   return (
     <>
       <SEOHead
-        title={`${project.title} — VELTRIX Case Study`}
+        title={`${project.title} — VELTRICKS Case Study`}
         description={project.description}
-        canonical={`https://veltrix.dev/projects/${project.id}`}
+        canonical={`https://VELTRICKS.dev/projects/${project.id}`}
       />
 
       <main id="main" className="min-h-screen bg-bg-base pt-24 pb-32">

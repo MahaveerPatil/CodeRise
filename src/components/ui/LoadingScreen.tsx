@@ -13,11 +13,11 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           className="fixed inset-0 z-[9000] flex flex-col items-center justify-center bg-bg-base"
-          aria-label="Loading VELTRIX"
+          aria-label="Loading VELTRICKS"
           role="status"
           aria-live="polite"
         >
-          {/* VELTRIX wordmark with draw-in animation */}
+          {/* VELTRICKS wordmark with draw-in animation */}
           <div className="mb-8">
             <svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <motion.text
@@ -32,13 +32,13 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                VELTRIX
+                VELTRICKS
               </motion.text>
               <defs>
                 <linearGradient id="loadGrad" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#6366F1" />
-                  <stop offset="50%" stopColor="#8B5CF6" />
-                  <stop offset="100%" stopColor="#06B6D4" />
+                  <stop offset="0%" stopColor="#991B1B" />
+                  <stop offset="50%" stopColor="#DC2626" />
+                  <stop offset="100%" stopColor="#F97316" />
                 </linearGradient>
               </defs>
             </svg>
@@ -48,7 +48,7 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
           <div className="w-48 h-0.5 bg-border-subtle rounded-full overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ background: 'linear-gradient(90deg, #6366F1, #06B6D4)' }}
+              style={{ background: 'linear-gradient(90deg, #991B1B, #DC2626)' }}
               initial={{ width: '0%' }}
               animate={{ width: '100%' }}
               transition={{ duration: 1.2, ease: 'easeInOut' }}
