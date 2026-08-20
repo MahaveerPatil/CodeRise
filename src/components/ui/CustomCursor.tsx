@@ -73,7 +73,7 @@ export function CustomCursor() {
         style={{
           width: isHovering ? 4 : 8,
           height: isHovering ? 4 : 8,
-          background: '#DC2626',
+          background: '#FF6B6B',
           opacity: isOverInput ? 0 : 1,
         }}
       />
@@ -86,7 +86,7 @@ export function CustomCursor() {
         style={{
           width: isHovering ? 48 : 32,
           height: isHovering ? 48 : 32,
-          border: '1.5px solid rgba(220, 38, 38, 0.5)',
+          border: '1.5px solid rgba(255, 107, 107, 0.5)',
           opacity: isOverInput ? 0 : 0.8,
           marginLeft: isHovering ? -8 : 0,
           marginTop: isHovering ? -8 : 0,

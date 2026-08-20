@@ -21,7 +21,7 @@ export function AnimatedGrid({ className, opacity = 0.15 }: AnimatedGridProps) {
       >
         <defs>
           <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#DC2626" strokeWidth="0.5" />
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#FF6B6B" strokeWidth="0.5" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />

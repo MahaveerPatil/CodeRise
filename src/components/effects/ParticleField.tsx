@@ -10,7 +10,7 @@ interface Particle {
   color: string;
 }
 
-const COLORS = ['#DC2626', '#F97316', '#991B1B'];
+const COLORS = ['#FF6B6B', '#FF8E53', '#FFD93D'];
 const CONNECTION_DISTANCE = 120;
 const REPULSION_DISTANCE = 150;
 
@@ -106,7 +106,7 @@ export function ParticleField() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(220, 38, 38, ${alpha})`;
+            ctx.strokeStyle = `rgba(255, 107, 107, ${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }

@@ -30,8 +30,8 @@ export function HeroSection() {
       <Suspense fallback={null}>
         <ParticleField />
       </Suspense>
-      <GlowOrb color="#DC2626" size={800} opacity={0.12} className="top-0 left-1/4 z-0" />
-      <GlowOrb color="#991B1B" size={600} opacity={0.08} className="bottom-1/4 right-1/4 z-0" />
+      <GlowOrb color="#FF6B6B" size={800} opacity={0.12} className="top-0 left-1/4 z-0" />
+      <GlowOrb color="#FF8E53" size={600} opacity={0.08} className="bottom-1/4 right-1/4 z-0" />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

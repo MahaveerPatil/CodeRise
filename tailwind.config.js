@@ -5,27 +5,27 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#DC2626',   // Crimson Red
-          secondary: '#F97316', // Ember Orange
-          accent: '#991B1B',    // Deep Wine Red
+          primary: '#FF6B6B',   // Coral
+          secondary: '#FFD93D', // Warm Yellow
+          accent: '#FF8E53',    // Sunset Orange
         },
         bg: {
-          base: '#080505',
-          surface: '#110A0A',
-          elevated: '#1A0E0E',
-          card: '#130909',
-          cardHover: '#1E1010',
+          base: '#07060A',
+          surface: '#0F0D14',
+          elevated: '#17141E',
+          card: '#120F18',
+          cardHover: '#1C1824',
         },
         text: {
-          primary: '#F8F0F0',
-          secondary: '#B0928F',
-          muted: '#6B4C4C',
-          inverse: '#080505',
+          primary: '#F5F0FF',
+          secondary: '#A899C0',
+          muted: '#5C5070',
+          inverse: '#07060A',
         },
         border: {
-          subtle: 'rgba(220, 38, 38, 0.12)',
-          default: 'rgba(220, 38, 38, 0.2)',
-          strong: 'rgba(220, 38, 38, 0.4)',
+          subtle: 'rgba(255, 107, 107, 0.12)',
+          default: 'rgba(255, 107, 107, 0.22)',
+          strong: 'rgba(255, 107, 107, 0.4)',
         },
         success: '#10B981',
         warning: '#F59E0B',
@@ -45,11 +45,11 @@ export default {
         '2xl': '1.5rem',
       },
       boxShadow: {
-        glow: '0 0 20px rgba(220, 38, 38, 0.35)',
-        'glow-strong': '0 0 40px rgba(220, 38, 38, 0.55)',
-        'glow-orange': '0 0 20px rgba(249, 115, 22, 0.3)',
+        glow: '0 0 20px rgba(255, 107, 107, 0.35)',
+        'glow-strong': '0 0 40px rgba(255, 107, 107, 0.55)',
+        'glow-yellow': '0 0 20px rgba(255, 217, 61, 0.3)',
         card: '0 4px 24px rgba(0, 0, 0, 0.5)',
-        'card-hover': '0 8px 40px rgba(220, 38, 38, 0.25)',
+        'card-hover': '0 8px 40px rgba(255, 107, 107, 0.2)',
         elevated: '0 20px 60px rgba(0, 0, 0, 0.7)',
       },
     },

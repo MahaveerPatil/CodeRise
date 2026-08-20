@@ -4,7 +4,7 @@
 
 @layer base {
   *:focus-visible {
-    outline: 2px solid #DC2626;
+    outline: 2px solid #FF6B6B;
     outline-offset: 2px;
   }
 }
@@ -12,23 +12,23 @@
 /* ─── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
   /* Gradients */
-  --gradient-brand: linear-gradient(135deg, #991B1B 0%, #DC2626 50%, #F97316 100%);
+  --gradient-brand: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFD93D 100%);
   --gradient-brand-subtle: linear-gradient(
     135deg,
-    rgba(153, 27, 27, 0.15) 0%,
-    rgba(220, 38, 38, 0.1) 50%,
-    rgba(249, 115, 22, 0.05) 100%
+    rgba(255, 107, 107, 0.15) 0%,
+    rgba(255, 142, 83, 0.1) 50%,
+    rgba(255, 217, 61, 0.05) 100%
   );
-  --gradient-text: linear-gradient(135deg, #DC2626 0%, #F97316 100%);
+  --gradient-text: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFD93D 100%);
 
   /* Glass backgrounds */
-  --glass-weak-bg: rgba(17, 10, 10, 0.6);
-  --glass-medium-bg: rgba(17, 10, 10, 0.8);
-  --glass-strong-bg: rgba(8, 5, 5, 0.95);
+  --glass-weak-bg: rgba(15, 13, 20, 0.6);
+  --glass-medium-bg: rgba(15, 13, 20, 0.8);
+  --glass-strong-bg: rgba(7, 6, 10, 0.95);
 
   /* Shadows */
-  --shadow-glow: 0 0 20px rgba(220, 38, 38, 0.35);
-  --shadow-glow-strong: 0 0 40px rgba(220, 38, 38, 0.55);
+  --shadow-glow: 0 0 20px rgba(255, 107, 107, 0.35);
+  --shadow-glow-strong: 0 0 40px rgba(255, 107, 107, 0.55);
 }
 
 /* ─── Global Resets & Base ───────────────────────────────────────────────── */
@@ -38,16 +38,16 @@ html {
 
 body {
   margin: 0;
-  background-color: #080505;
-  color: #F8F0F0;
+  background-color: #07060A;
+  color: #F5F0FF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ─── Selection ─────────────────────────────────────────────────────────── */
 ::selection {
-  background-color: rgba(220, 38, 38, 0.35);
-  color: #F8F0F0;
+  background-color: rgba(255, 107, 107, 0.3);
+  color: #F5F0FF;
 }
 
 /* ─── Scrollbar (webkit) ─────────────────────────────────────────────────── */
@@ -57,16 +57,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #110A0A;
+  background: #0F0D14;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(220, 38, 38, 0.4);
+  background: rgba(255, 107, 107, 0.4);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(220, 38, 38, 0.65);
+  background: rgba(255, 107, 107, 0.65);
 }
 
 /* ─── Utility Classes ───────────────────────────────────────────────────── */
@@ -83,21 +83,21 @@ body {
     background: var(--glass-weak-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(220, 38, 38, 0.12);
+    border: 1px solid rgba(255, 107, 107, 0.12);
   }
 
   .glass-medium {
     background: var(--glass-medium-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(220, 38, 38, 0.2);
+    border: 1px solid rgba(255, 107, 107, 0.22);
   }
 
   .glass-strong {
     background: var(--glass-strong-bg);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(220, 38, 38, 0.3);
+    border: 1px solid rgba(255, 107, 107, 0.3);
   }
 
   @keyframes grid-drift {

@@ -45,7 +45,7 @@ export function StatsSection() {
       {/* Brand gradient background */}
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(135deg, #7f1d1d 0%, #DC2626 50%, #F97316 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #7c2020 0%, #FF6B6B 50%, #FFD93D 100%)' }}
         aria-hidden="true"
       />
       {/* Dark overlay */}

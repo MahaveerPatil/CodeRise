@@ -36,9 +36,9 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
               </motion.text>
               <defs>
                 <linearGradient id="loadGrad" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#991B1B" />
-                  <stop offset="50%" stopColor="#DC2626" />
-                  <stop offset="100%" stopColor="#F97316" />
+                  <stop offset="0%" stopColor="#FF6B6B" />
+                  <stop offset="50%" stopColor="#FF8E53" />
+                  <stop offset="100%" stopColor="#FFD93D" />
                 </linearGradient>
               </defs>
             </svg>
@@ -48,7 +48,7 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
           <div className="w-48 h-0.5 bg-border-subtle rounded-full overflow-hidden">
             <motion.div
               className="h-full rounded-full"
-              style={{ background: 'linear-gradient(90deg, #991B1B, #DC2626)' }}
+              style={{ background: 'linear-gradient(90deg, #FF6B6B, #FFD93D)' }}
               initial={{ width: '0%' }}
               animate={{ width: '100%' }}
               transition={{ duration: 1.2, ease: 'easeInOut' }}
