@@ -2,49 +2,31 @@ import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef({ x: -100, y: -100 });
-  const ringPosRef = useRef({ x: -100, y: -100 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
+  const posRef = useRef({ x: -100, y: -100 });
   const reducedMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isOverInput, setIsOverInput] = useState(false);
 
   useEffect(() => {
-    // Only on fine pointer
+    // Only on fine pointer (desktop)
     if (!window.matchMedia('(pointer: fine)').matches) return;
 
     setIsVisible(true);
 
     const handleMouseMove = (e: MouseEvent) => {
       posRef.current = { x: e.clientX, y: e.clientY };
-
       const target = e.target as HTMLElement;
-      const isInteractive = target.closest('a, button, [role="button"]') !== null;
-      const isInput = target.closest('input, textarea, select') !== null;
-      setIsHovering(isInteractive);
-      setIsOverInput(isInput);
+      setIsHovering(target.closest('a, button, [role="button"]') !== null);
+      setIsOverInput(target.closest('input, textarea, select') !== null);
     };
 
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
     const animate = () => {
-      const dot = dotRef.current;
-      const ring = ringRef.current;
-      if (dot && ring) {
-        // Dot follows exactly
-        dot.style.transform = `translate(${posRef.current.x - 4}px, ${posRef.current.y - 4}px)`;
-
-        if (!reducedMotion) {
-          // Ring lerps — 0.42 = very snappy, tracks cursor closely
-          ringPosRef.current.x = lerp(ringPosRef.current.x, posRef.current.x, 0.42);
-          ringPosRef.current.y = lerp(ringPosRef.current.y, posRef.current.y, 0.42);
-        } else {
-          ringPosRef.current = { ...posRef.current };
-        }
-        ring.style.transform = `translate(${ringPosRef.current.x - 16}px, ${ringPosRef.current.y - 16}px)`;
+      const el = cursorRef.current;
+      if (el) {
+        el.style.transform = `translate(${posRef.current.x}px, ${posRef.current.y}px)`;
       }
       rafRef.current = requestAnimationFrame(animate);
     };
@@ -62,36 +44,44 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Add global cursor:none via style tag */}
       <style>{`* { cursor: none !important; }`}</style>
 
-      {/* Dot */}
+      {/* Single sharp crosshair cursor */}
       <div
-        ref={dotRef}
+        ref={cursorRef}
         aria-hidden="true"
-        className="fixed top-0 left-0 z-[9999] pointer-events-none rounded-full transition-all duration-150"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none"
         style={{
-          width: isHovering ? 4 : 8,
-          height: isHovering ? 4 : 8,
-          background: '#FF6B6B',
           opacity: isOverInput ? 0 : 1,
+          willChange: 'transform',
         }}
-      />
-
-      {/* Ring */}
-      <div
-        ref={ringRef}
-        aria-hidden="true"
-        className="fixed top-0 left-0 z-[9998] pointer-events-none rounded-full transition-all duration-200"
-        style={{
-          width: isHovering ? 48 : 32,
-          height: isHovering ? 48 : 32,
-          border: '1.5px solid rgba(255, 107, 107, 0.5)',
-          opacity: isOverInput ? 0 : 0.8,
-          marginLeft: isHovering ? -8 : 0,
-          marginTop: isHovering ? -8 : 0,
-        }}
-      />
+      >
+        {/* Outer diamond shape */}
+        <div
+          style={{
+            position: 'absolute',
+            width: isHovering ? 28 : 20,
+            height: isHovering ? 28 : 20,
+            transform: `translate(-50%, -50%) rotate(45deg)`,
+            border: `2px solid #FF6B6B`,
+            borderRadius: '3px',
+            opacity: isHovering ? 1 : 0.75,
+            transition: 'width 0.12s ease, height 0.12s ease, opacity 0.12s ease',
+          }}
+        />
+        {/* Inner dot */}
+        <div
+          style={{
+            position: 'absolute',
+            width: isHovering ? 5 : 4,
+            height: isHovering ? 5 : 4,
+            transform: 'translate(-50%, -50%)',
+            background: '#FFD93D',
+            borderRadius: '50%',
+            transition: 'width 0.12s ease, height 0.12s ease',
+          }}
+        />
+      </div>
     </>
   );
 }
