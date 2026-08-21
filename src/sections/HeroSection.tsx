@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { AnimatedGrid } from '../components/effects/AnimatedGrid';
 import { GlowOrb } from '../components/effects/GlowOrb';
 import { Button } from '../components/ui/Button';
-import { fadeUp, fadeIn } from '../utils/animations';
+import { fadeUp } from '../utils/animations';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const ParticleField = lazy(() => import('../components/effects/ParticleField'));
@@ -35,20 +35,6 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Overline */}
-        <motion.div
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: reducedMotion ? 0 : 0 }}
-          className="mb-6"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-semibold tracking-widest uppercase border border-brand-primary/30 text-brand-primary bg-brand-primary/5">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" aria-hidden="true" />
-            Premium IT Solutions
-          </span>
-        </motion.div>
-
         {/* Headline */}
         <motion.h1
           className="font-display font-bold text-[36px] md:text-[45px] text-text-primary leading-tight mb-6"
