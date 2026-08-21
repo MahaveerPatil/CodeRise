@@ -38,9 +38,9 @@ export function CustomCursor() {
         dot.style.transform = `translate(${posRef.current.x - 4}px, ${posRef.current.y - 4}px)`;
 
         if (!reducedMotion) {
-          // Ring lerps
-          ringPosRef.current.x = lerp(ringPosRef.current.x, posRef.current.x, 0.18);
-          ringPosRef.current.y = lerp(ringPosRef.current.y, posRef.current.y, 0.18);
+          // Ring lerps — 0.42 = very snappy, tracks cursor closely
+          ringPosRef.current.x = lerp(ringPosRef.current.x, posRef.current.x, 0.42);
+          ringPosRef.current.y = lerp(ringPosRef.current.y, posRef.current.y, 0.42);
         } else {
           ringPosRef.current = { ...posRef.current };
         }

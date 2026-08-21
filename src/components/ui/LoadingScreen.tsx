@@ -19,14 +19,14 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
         >
           {/* VELTRICKS wordmark with draw-in animation */}
           <div className="mb-8">
-            <svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg width="280" height="56" viewBox="0 0 280 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <motion.text
-                x="100"
-                y="38"
+                x="140"
+                y="42"
                 textAnchor="middle"
                 fontFamily="Syne, system-ui, sans-serif"
                 fontWeight="700"
-                fontSize="40"
+                fontSize="36"
                 fill="url(#loadGrad)"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -35,7 +35,7 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
                 VELTRICKS
               </motion.text>
               <defs>
-                <linearGradient id="loadGrad" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
+                <linearGradient id="loadGrad" x1="0" y1="0" x2="280" y2="0" gradientUnits="userSpaceOnUse">
                   <stop offset="0%" stopColor="#FF6B6B" />
                   <stop offset="50%" stopColor="#FF8E53" />
                   <stop offset="100%" stopColor="#FFD93D" />
