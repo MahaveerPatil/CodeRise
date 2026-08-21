@@ -88,7 +88,7 @@ export function HeroSection() {
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        variants={fadeIn}
+        variants={fadeUp}
         initial="hidden"
         animate="visible"
         transition={{ delay: reducedMotion ? 0 : 1.2 }}
