@@ -10,6 +10,7 @@ import { LoadingScreen } from '../components/ui/LoadingScreen';
 import { PageWrapper } from './PageWrapper';
 import { EasterEgg } from '../components/effects/EasterEgg';
 import { Footer } from './Footer';
+import { WhatsAppWidget } from '../components/ui/WhatsAppWidget';
 
 export function RootLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,6 +54,7 @@ export function RootLayout() {
         </PageWrapper>
       </AnimatePresence>
       <EasterEgg />
+      <WhatsAppWidget />
       <Footer />
     </>
   );

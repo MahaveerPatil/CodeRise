@@ -34,10 +34,32 @@ const initialData: FormData = {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Swap this for your real backend call (e.g. fetch to an API endpoint or EmailJS)
-async function submitForm(_data: FormData): Promise<void> {
-  // Placeholder: simulates a 1s network call
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+// Calls the Cloudflare Worker API — swap VITE_CLOUDFLARE_WORKER_URL in .env for production
+async function submitForm(data: FormData): Promise<void> {
+  const workerUrl = (import.meta.env.VITE_CLOUDFLARE_WORKER_URL as string) || '';
+  const endpoint = workerUrl ? `${workerUrl}/inquiries` : null;
+
+  // If no worker URL is configured, fall back to Supabase direct insert
+  if (!endpoint) {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabase = createClient(
+      import.meta.env.VITE_SUPABASE_URL as string,
+      import.meta.env.VITE_SUPABASE_ANON_KEY as string
+    );
+    const { error } = await supabase.from('inquiries').insert([data]);
+    if (error) throw new Error(error.message);
+    return;
+  }
+
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: 'Submission failed' })) as { error?: string };
+    throw new Error(err.error || 'Submission failed');
+  }
 }
 
 const fieldClass = (error?: string) =>
