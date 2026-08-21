@@ -5,7 +5,7 @@ compatibility_date = "2024-09-01"
 [vars]
 ADMIN_EMAIL = "pmahaveer832@gmail.com"
 SUPABASE_URL = "https://omksxlgibwqgirqcgkhh.supabase.co"
-CORS_ORIGINS = "https://veltricks-website.workers.dev,http://localhost:5173"
+CORS_ORIGINS = "https://veltrix-website.pmahaveer832.workers.dev,http://localhost:5173"
 
-# Secrets — set with: wrangler secret put RESEND_API_KEY
+# Secrets ï¿½ set with: wrangler secret put RESEND_API_KEY
 # wrangler secret put SUPABASE_SERVICE_KEY
