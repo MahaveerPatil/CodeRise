@@ -21,6 +21,11 @@
   );
   --gradient-text: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFD93D 100%);
 
+  /* Light blue accent */
+  --blue-accent: rgba(100, 200, 255, 0.05);
+  --blue-accent-mid: rgba(100, 200, 255, 0.08);
+  --gradient-blue-subtle: radial-gradient(ellipse at 50% 50%, rgba(100, 200, 255, 0.07) 0%, transparent 70%);
+
   /* Glass backgrounds */
   --glass-weak-bg: rgba(15, 13, 20, 0.6);
   --glass-medium-bg: rgba(15, 13, 20, 0.8);
@@ -39,6 +44,10 @@ html {
 body {
   margin: 0;
   background-color: #07060A;
+  /* subtle light-blue ambient glow sitting at ~5% across the page */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(100, 200, 255, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(80, 180, 255, 0.04) 0%, transparent 55%);
   color: #F5F0FF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -126,5 +135,19 @@ body {
 
   .animate-marquee-right {
     animation: marquee-right 30s linear infinite;
+  }
+
+  /* Light-blue section accent — use on sections to add a ~5% blue radial glow */
+  .blue-accent-bg {
+    position: relative;
+  }
+
+  .blue-accent-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(100, 200, 255, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
 }

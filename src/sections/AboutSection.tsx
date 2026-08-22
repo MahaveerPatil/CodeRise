@@ -29,7 +29,7 @@ export function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative py-24 bg-bg-surface"
+      className="relative py-24 bg-bg-surface blue-accent-bg"
       aria-label="About VELTRICKS"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,7 +79,7 @@ export function AboutSection() {
 
                 {/* Name placeholder */}
                 <h3 className="font-display font-bold text-xl text-text-primary mb-1">
-                  [Founder Name]
+                  [Varadaraj Patil]
                 </h3>
                 <p className="text-brand-primary text-sm font-medium mb-1">Founder &amp; CEO, VELTRICKS</p>
                 <p className="text-text-muted text-xs font-mono mb-6">Replace with actual founder details</p>
