@@ -7,7 +7,7 @@ import { useInView } from '../hooks/useInView';
 
 const contactInfo = [
   { icon: '📧', label: 'Email', value: 'hello@VELTRICKS.dev', href: 'mailto:hello@VELTRICKS.dev' },
-  { icon: '📞', label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
+  { icon: '📞', label: 'Phone', value: '+91 8310659343', href: 'tel:+918310659343' },
   { icon: '📍', label: 'Location', value: 'India · Remote Worldwide', href: undefined },
 ];
 
@@ -57,7 +57,7 @@ export function ContactSection() {
     <section
       id="contact"
       ref={ref}
-      className="relative py-24 bg-bg-base"
+      className="relative py-24 bg-bg-base blue-accent-bg"
       aria-labelledby="contact-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
