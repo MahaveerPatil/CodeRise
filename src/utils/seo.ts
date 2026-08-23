@@ -1,7 +1,7 @@
 export const defaultSEO = {
-  title: 'VELTRICKS — Premium Software Development Company India | Web, Mobile, AI & Cloud',
+  title: 'VELTRICKS — IT & Software Development Company in Belagavi (Belgaum) | Web, Mobile, AI & Cloud',
   description:
-    'VELTRICKS is a premium software development company in India. We build world-class websites, web apps, mobile apps, AI/ML solutions, cloud infrastructure and e-commerce stores. Turn your idea into reality.',
+    'VELTRICKS is a top IT and software development company in Belagavi (Belgaum), Karnataka. We build websites, web apps, mobile apps, AI/ML solutions and cloud infrastructure. Serving Belagavi, Belgaum and clients worldwide.',
   canonical: 'https://veltricks.dev/',
   ogImage: 'https://veltricks.dev/og-image.jpg',
   twitterHandle: '@veltricks',
@@ -10,15 +10,15 @@ export const defaultSEO = {
 
 export const pageSEO: Record<string, { title: string; description: string; canonical: string }> = {
   home: {
-    title: 'VELTRICKS — Premium Software Development Company India | Web, Mobile, AI & Cloud',
+    title: 'VELTRICKS — IT & Software Company in Belagavi Belgaum | Web, Mobile, AI & Cloud',
     description:
-      'VELTRICKS builds premium digital products — websites, web apps, mobile apps, AI/ML, cloud & DevOps. India-based software development company serving global clients.',
+      'Top IT and software development company in Belagavi (Belgaum), Karnataka. Web development, mobile apps, AI/ML, cloud & DevOps. Hiring in Belagavi. Contact us today.',
     canonical: 'https://veltricks.dev/',
   },
   blog: {
-    title: 'Blog — Tech Insights & Tutorials | VELTRICKS',
+    title: 'Blog — Tech Insights & Tutorials | VELTRICKS Belagavi',
     description:
-      'Explore expert articles on web development, mobile apps, AI/ML, cloud architecture and software engineering best practices from the VELTRICKS team.',
+      'Expert articles on web development, mobile apps, AI/ML and cloud from VELTRICKS — IT company based in Belagavi, Karnataka.',
     canonical: 'https://veltricks.dev/blog',
   },
 };
@@ -28,7 +28,7 @@ export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'VELTRICKS',
-  alternateName: 'Veltricks Software',
+  alternateName: ['Veltricks Software', 'Veltricks Belagavi', 'Veltricks Belgaum'],
   url: 'https://veltricks.dev',
   logo: {
     '@type': 'ImageObject',
@@ -36,10 +36,14 @@ export const organizationSchema = {
     width: 512,
     height: 512,
   },
-  description: defaultSEO.description,
+  description:
+    'VELTRICKS is a premium IT and software development company in Belagavi (Belgaum), Karnataka, India. We offer web development, mobile app development, AI/ML solutions, cloud infrastructure and UI/UX design.',
   foundingDate: '2024',
   address: {
     '@type': 'PostalAddress',
+    addressLocality: 'Belagavi',
+    addressRegion: 'Karnataka',
+    postalCode: '590001',
     addressCountry: 'IN',
   },
   contactPoint: [
@@ -48,8 +52,8 @@ export const organizationSchema = {
       telephone: '+91-8310659343',
       contactType: 'customer service',
       email: 'hello@veltricks.dev',
-      availableLanguage: ['English', 'Hindi'],
-      areaServed: 'Worldwide',
+      availableLanguage: ['English', 'Hindi', 'Kannada'],
+      areaServed: ['Belagavi', 'Karnataka', 'India', 'Worldwide'],
     },
   ],
   sameAs: [
@@ -60,32 +64,32 @@ export const organizationSchema = {
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Software Development Services',
+    name: 'IT & Software Development Services in Belagavi',
     itemListElement: [
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Web Development',
+          name: 'Web Development Belagavi',
           description:
-            'Modern, responsive and high-performance websites and web applications using React, Next.js and TypeScript.',
+            'Professional website and web app development in Belagavi, Belgaum using React, Next.js and TypeScript.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Mobile App Development',
-          description: 'Scalable Android and iOS applications using React Native and Flutter.',
+          name: 'Mobile App Development Belagavi',
+          description: 'Android and iOS app development company in Belagavi, Karnataka.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'AI & Machine Learning',
+          name: 'AI & Machine Learning Belagavi',
           description:
-            'Intelligent automation, predictive analytics and LLM-powered solutions using Python, TensorFlow and OpenAI.',
+            'AI and ML development services from Belagavi, Karnataka — automation, analytics and LLM solutions.',
         },
       },
       {
@@ -93,26 +97,25 @@ export const organizationSchema = {
         itemOffered: {
           '@type': 'Service',
           name: 'Cloud & DevOps',
-          description:
-            'Cloud infrastructure, CI/CD pipelines and scalable deployment on AWS and Azure.',
+          description: 'Cloud infrastructure and DevOps services — AWS, Azure, Docker, Kubernetes.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Custom Software Development',
+          name: 'Custom Software Development Belagavi',
           description:
-            'End-to-end custom software engineered around unique business requirements using Java, Spring Boot and Python.',
+            'Custom software solutions for businesses in Belagavi and Belgaum, Karnataka.',
         },
       },
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'E-Commerce Development',
+          name: 'E-Commerce Development Belagavi',
           description:
-            'High-converting online stores with Shopify, WooCommerce and custom React solutions.',
+            'E-commerce website development for businesses in Belagavi using Shopify, WooCommerce and React.',
         },
       },
       {
@@ -120,33 +123,64 @@ export const organizationSchema = {
         itemOffered: {
           '@type': 'Service',
           name: 'UI/UX Design',
-          description:
-            'User-centered interface design using Figma, prototyping and modern design systems.',
+          description: 'Professional UI/UX design services in Belagavi, Karnataka.',
         },
       },
     ],
   },
 };
 
-// FAQ Schema — boosts chances of rich result / People Also Ask
+// FAQ Schema — targets local Belagavi/Belgaum + general searches
 export const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What services does VELTRICKS offer?',
+      name: 'Is VELTRICKS an IT company in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'VELTRICKS offers web development, mobile app development (iOS & Android), AI/ML solutions, cloud & DevOps, custom software development, e-commerce stores, and UI/UX design services.',
+        text: 'Yes. VELTRICKS is an IT and software development company based in Belagavi (also known as Belgaum), Karnataka, India. We serve local businesses in Belagavi as well as clients across India and worldwide.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is VELTRICKS a software development company in India?',
+      name: 'Which software companies are in Belgaum Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. VELTRICKS is a premium software development company based in India, serving clients globally across the US, UK, Australia and beyond.',
+        text: 'VELTRICKS is one of the leading software development companies in Belagavi (Belgaum), Karnataka. We specialize in web development, mobile apps, AI/ML solutions and cloud infrastructure.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is VELTRICKS hiring in Belagavi?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, VELTRICKS is actively hiring developers, designers and tech professionals in Belagavi, Karnataka. Contact us at hello@veltricks.dev or visit veltricks.dev to learn about open opportunities.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What IT services does VELTRICKS offer in Belagavi?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'VELTRICKS offers web development, mobile app development, AI & ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services in Belagavi, Belgaum and across Karnataka.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I contact the best software company in Belagavi?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'You can reach VELTRICKS — a top software development company in Belagavi — by emailing hello@veltricks.dev, calling +91-8310659343, or filling out the contact form at veltricks.dev.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What services does VELTRICKS offer?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'VELTRICKS offers web development, mobile app development (iOS & Android), AI/ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services.',
       },
     },
     {
@@ -154,31 +188,7 @@ export const faqSchema = {
       name: 'How much does software development cost at VELTRICKS?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Project costs vary based on scope and complexity. VELTRICKS works with budgets starting from ₹50,000 for smaller projects up to ₹10,00,000+ for enterprise solutions. Contact us for a free estimate.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I hire VELTRICKS for my project?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Simply fill out the project inquiry form on our website at veltricks.dev or email us at hello@veltricks.dev. We respond within 24 hours.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Does VELTRICKS work with startups?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Absolutely. VELTRICKS has specific startup packages that include MVP development, UI/UX design, web and mobile app development, and ongoing technical support to help startups go from idea to launch.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What technologies does VELTRICKS use?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'VELTRICKS uses React, Next.js, TypeScript, Node.js, Python, Java, Spring Boot, React Native, Flutter, AWS, Azure, Docker, Kubernetes, TensorFlow, OpenAI and more.',
+        text: 'Project costs vary based on scope. VELTRICKS works with budgets starting from ₹50,000 for smaller projects up to ₹10,00,000+ for enterprise solutions. Contact us for a free estimate.',
       },
     },
   ],
