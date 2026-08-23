@@ -1,5 +1,5 @@
 import { SEOHead } from '../components/seo/SEOHead';
-import { organizationSchema } from '../utils/seo';
+import { organizationSchema, faqSchema } from '../utils/seo';
 import { HeroSection } from '../sections/HeroSection';
 import { ServicesSection } from '../sections/ServicesSection';
 import { TechEcosystemSection } from '../sections/TechEcosystemSection';
@@ -16,7 +16,7 @@ import { ContactSection } from '../sections/ContactSection';
 export function HomePage() {
   return (
     <main id="main">
-      <SEOHead schema={organizationSchema} />
+      <SEOHead schema={organizationSchema} schemas={[faqSchema]} />
       <HeroSection />
       <ServicesSection />
       <TechEcosystemSection />

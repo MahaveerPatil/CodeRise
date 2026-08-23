@@ -1,5 +1,17 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /admin/*
+Disallow: /*.json$
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
 
 Sitemap: https://veltricks.dev/sitemap.xml
