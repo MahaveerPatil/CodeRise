@@ -33,7 +33,7 @@ async function sendEmail(env: Env, to: string, subject: string, html: string): P
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'CodeRise <hello@coderise.dev>',
+        from: 'CodeRise <hello@coderise.com>',
         to: [to],
         subject,
         html,
@@ -137,7 +137,7 @@ export default {
             </p>
             <div style="margin:24px 0;padding:16px;background:rgba(255,107,107,0.05);border-radius:8px;border-left:3px solid #FF6B6B">
               <p style="margin:0;font-size:13px;color:#a899c0">In the meantime, you can reach us at</p>
-              <p style="margin:4px 0 0;font-weight:600"><a href="mailto:hello@coderise.dev" style="color:#FF6B6B">hello@coderise.dev</a></p>
+              <p style="margin:4px 0 0;font-weight:600"><a href="mailto:hello@coderise.com" style="color:#FF6B6B">hello@coderise.com</a></p>
             </div>
             <p style="margin-top:24px;color:#a899c0">Best regards,<br/><strong style="color:#f5f0ff">CodeRise Team</strong></p>
           </div>

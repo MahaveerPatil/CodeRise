@@ -2,8 +2,8 @@ export const defaultSEO = {
   title: 'CodeRise — IT & Software Development Company in Belagavi (Belgaum) | Web, Mobile, AI & Cloud',
   description:
     'CodeRise is a top IT and software development company in Belagavi (Belgaum), Karnataka. We build websites, web apps, mobile apps, AI/ML solutions and cloud infrastructure. Serving Belagavi, Belgaum and clients worldwide.',
-  canonical: 'https://coderise.dev/',
-  ogImage: 'https://coderise.dev/og-image.jpg',
+  canonical: 'https://coderise.com/',
+  ogImage: 'https://coderise.com/og-image.jpg',
   twitterHandle: '@coderise',
   siteName: 'CodeRise',
 };
@@ -13,13 +13,13 @@ export const pageSEO: Record<string, { title: string; description: string; canon
     title: 'CodeRise — IT & Software Company in Belagavi Belgaum | Web, Mobile, AI & Cloud',
     description:
       'Top IT and software development company in Belagavi (Belgaum), Karnataka. Web development, mobile apps, AI/ML, cloud & DevOps. Hiring in Belagavi. Contact us today.',
-    canonical: 'https://coderise.dev/',
+    canonical: 'https://coderise.com/',
   },
   blog: {
     title: 'Blog — Tech Insights & Tutorials | CodeRise Belagavi',
     description:
       'Expert articles on web development, mobile apps, AI/ML and cloud from CodeRise — IT company based in Belagavi, Karnataka.',
-    canonical: 'https://coderise.dev/blog',
+    canonical: 'https://coderise.com/blog',
   },
 };
 
@@ -29,10 +29,10 @@ export const organizationSchema = {
   '@type': 'Organization',
   name: 'CodeRise',
   alternateName: ['CodeRise Software', 'CodeRise Belagavi', 'CodeRise Belgaum'],
-  url: 'https://coderise.dev',
+  url: 'https://coderise.com',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://coderise.dev/favicon.svg',
+    url: 'https://coderise.com/favicon.svg',
     width: 512,
     height: 512,
   },
@@ -51,7 +51,7 @@ export const organizationSchema = {
       '@type': 'ContactPoint',
       telephone: '+91-8310659343',
       contactType: 'customer service',
-      email: 'hello@coderise.dev',
+      email: 'hello@coderise.com',
       availableLanguage: ['English', 'Hindi', 'Kannada'],
       areaServed: ['Belagavi', 'Karnataka', 'India', 'Worldwide'],
     },
@@ -156,7 +156,7 @@ export const faqSchema = {
       name: 'Is CodeRise hiring in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, CodeRise is actively hiring developers, designers and tech professionals in Belagavi, Karnataka. Contact us at hello@coderise.dev or visit coderise.dev to learn about open opportunities.',
+        text: 'Yes, CodeRise is actively hiring developers, designers and tech professionals in Belagavi, Karnataka. Contact us at hello@coderise.com or visit coderise.com to learn about open opportunities.',
       },
     },
     {
@@ -172,7 +172,7 @@ export const faqSchema = {
       name: 'How do I contact the best software company in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You can reach CodeRise — a top software development company in Belagavi — by emailing hello@coderise.dev, calling +91-8310659343, or filling out the contact form at coderise.dev.',
+        text: 'You can reach CodeRise — a top software development company in Belagavi — by emailing hello@coderise.com, calling +91-8310659343, or filling out the contact form at coderise.com.',
       },
     },
     {

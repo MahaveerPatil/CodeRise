@@ -38,7 +38,7 @@ function CaseStudyPage() {
       <SEOHead
         title={`${project.title} — CodeRise Case Study`}
         description={project.description}
-        canonical={`https://coderise.dev/projects/${project.id}`}
+        canonical={`https://coderise.com/projects/${project.id}`}
       />
 
       <main id="main" className="min-h-screen bg-bg-base pt-24 pb-32">

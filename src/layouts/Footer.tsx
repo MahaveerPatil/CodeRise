@@ -117,8 +117,8 @@ export function Footer() {
             <h3 className="text-text-primary font-semibold text-sm mb-4 uppercase tracking-widest font-mono">Connect</h3>
             <ul className="space-y-2 mb-5">
               <li>
-                <a href="mailto:hello@coderise.dev" className="text-text-muted text-sm hover:text-brand-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded">
-                  hello@coderise.dev
+                <a href="mailto:hello@coderise.com" className="text-text-muted text-sm hover:text-brand-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded">
+                  hello@coderise.com
                 </a>
               </li>
               <li>

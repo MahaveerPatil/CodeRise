@@ -6,7 +6,7 @@ import { slideInLeft, fadeUp } from '../utils/animations';
 import { useInView } from '../hooks/useInView';
 
 const contactInfo = [
-  { icon: '📧', label: 'Email', value: 'hello@coderise.dev', href: 'mailto:hello@coderise.dev' },
+  { icon: '📧', label: 'Email', value: 'hello@coderise.com', href: 'mailto:hello@coderise.com' },
   { icon: '📞', label: 'Phone', value: '+91 8310659343', href: 'tel:+918310659343' },
   { icon: '📍', label: 'Location', value: 'India · Remote Worldwide', href: undefined },
 ];

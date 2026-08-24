@@ -34,7 +34,7 @@ export default function BlogPage() {
       <SEOHead
         title="Blog — CodeRise"
         description="Technology insights, case studies, and development articles from the CodeRise team."
-        canonical="https://coderise.dev/blog"
+        canonical="https://coderise.com/blog"
       />
       <main id="main" className="min-h-screen bg-bg-base pt-24 pb-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

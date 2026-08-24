@@ -13,7 +13,7 @@ const BOOT_LINES = [
   '> Welcome, developer. 👾',
   '',
   'You found the Easter egg! 🥚',
-  "We're hiring. hello@coderise.dev",
+  "We're hiring. hello@coderise.com",
 ];
 
 export function EasterEgg() {

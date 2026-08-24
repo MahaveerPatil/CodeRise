@@ -44,7 +44,7 @@ export default function BlogPostPage() {
       <SEOHead
         title={`${post.title} — CodeRise Blog`}
         description={post.excerpt || post.title}
-        canonical={`https://coderise.dev/blog/${post.slug}`}
+        canonical={`https://coderise.com/blog/${post.slug}`}
       />
       <main id="main" className="min-h-screen bg-bg-base pt-24 pb-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
