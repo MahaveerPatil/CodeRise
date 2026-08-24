@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER as string) || '918310659343';
-const MESSAGE = encodeURIComponent("Hi VELTRICKS! I'd like to discuss a project with you.");
+const MESSAGE = encodeURIComponent("Hi CodeRise! I'd like to discuss a project with you.");
 
 export function WhatsAppWidget() {
   const [showTip, setShowTip] = useState(false);
@@ -28,7 +28,7 @@ export function WhatsAppWidget() {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with VELTRICKS on WhatsApp"
+        aria-label="Chat with CodeRise on WhatsApp"
         onMouseEnter={() => setShowTip(true)}
         onMouseLeave={() => setShowTip(false)}
         whileHover={{ scale: 1.1 }}

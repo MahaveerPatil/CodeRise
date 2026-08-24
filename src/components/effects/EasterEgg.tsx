@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useKonamiCode } from '../../hooks/useKonamiCode';
 
 const BOOT_LINES = [
-  'Initializing VELTRICKS OS v2.0.25...',
+  'Initializing CodeRise OS v2.0.25...',
   'Loading premium modules... ████████████ 100%',
   'Connecting to the future...',
   'Calibrating pixel-perfect rendering engine...',
@@ -13,7 +13,7 @@ const BOOT_LINES = [
   '> Welcome, developer. 👾',
   '',
   'You found the Easter egg! 🥚',
-  "We're hiring. hello@VELTRICKS.dev",
+  "We're hiring. hello@coderise.dev",
 ];
 
 export function EasterEgg() {

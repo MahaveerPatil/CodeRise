@@ -33,7 +33,7 @@ async function sendEmail(env: Env, to: string, subject: string, html: string): P
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'VELTRICKS <hello@veltricks.dev>',
+        from: 'CodeRise <hello@coderise.dev>',
         to: [to],
         subject,
         html,
@@ -124,12 +124,12 @@ export default {
         await sendEmail(
           env,
           email,
-          `We received your inquiry — VELTRICKS`,
+          `We received your inquiry — CodeRise`,
           `
           <div style="font-family:sans-serif;max-width:600px;margin:auto;padding:32px;background:#0f0d14;color:#f5f0ff;border-radius:12px;border:1px solid rgba(255,107,107,0.2)">
             <h2 style="color:#FF6B6B;margin-top:0">Hi ${name},</h2>
             <p style="line-height:1.7;color:#a899c0">
-              Thank you for reaching out to <strong style="color:#f5f0ff">VELTRICKS</strong>!
+              Thank you for reaching out to <strong style="color:#f5f0ff">CodeRise</strong>!
               We've received your inquiry about <strong style="color:#FF6B6B">${service}</strong>.
             </p>
             <p style="line-height:1.7;color:#a899c0">
@@ -137,9 +137,9 @@ export default {
             </p>
             <div style="margin:24px 0;padding:16px;background:rgba(255,107,107,0.05);border-radius:8px;border-left:3px solid #FF6B6B">
               <p style="margin:0;font-size:13px;color:#a899c0">In the meantime, you can reach us at</p>
-              <p style="margin:4px 0 0;font-weight:600"><a href="mailto:hello@veltricks.dev" style="color:#FF6B6B">hello@veltricks.dev</a></p>
+              <p style="margin:4px 0 0;font-weight:600"><a href="mailto:hello@coderise.dev" style="color:#FF6B6B">hello@coderise.dev</a></p>
             </div>
-            <p style="margin-top:24px;color:#a899c0">Best regards,<br/><strong style="color:#f5f0ff">VELTRICKS Team</strong></p>
+            <p style="margin-top:24px;color:#a899c0">Best regards,<br/><strong style="color:#f5f0ff">CodeRise Team</strong></p>
           </div>
           `
         );
@@ -163,7 +163,7 @@ export default {
 
       // ── Health check ─────────────────────────────────────────────
       if (url.pathname === '/health') {
-        return json({ status: 'ok', service: 'veltricks-api' }, 200, cors);
+        return json({ status: 'ok', service: 'coderise-api' }, 200, cors);
       }
 
       return json({ error: 'Not found' }, 404, cors);

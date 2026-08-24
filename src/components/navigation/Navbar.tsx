@@ -79,11 +79,11 @@ export function Navbar({ onMenuToggle, isMenuOpen }: NavbarProps) {
                 handleNavClick('#home');
               }}
               className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-lg p-1"
-              aria-label="VELTRICKS — Home"
+              aria-label="CodeRise — Home"
             >
               <span className="font-display font-bold text-xl tracking-tight">
                 <span className="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent">
-                  VELTRICKS
+                  CodeRise
                 </span>
               </span>
             </a>

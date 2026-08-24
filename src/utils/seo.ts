@@ -1,25 +1,25 @@
 export const defaultSEO = {
-  title: 'VELTRICKS — IT & Software Development Company in Belagavi (Belgaum) | Web, Mobile, AI & Cloud',
+  title: 'CodeRise — IT & Software Development Company in Belagavi (Belgaum) | Web, Mobile, AI & Cloud',
   description:
-    'VELTRICKS is a top IT and software development company in Belagavi (Belgaum), Karnataka. We build websites, web apps, mobile apps, AI/ML solutions and cloud infrastructure. Serving Belagavi, Belgaum and clients worldwide.',
-  canonical: 'https://veltricks.dev/',
-  ogImage: 'https://veltricks.dev/og-image.jpg',
-  twitterHandle: '@veltricks',
-  siteName: 'VELTRICKS',
+    'CodeRise is a top IT and software development company in Belagavi (Belgaum), Karnataka. We build websites, web apps, mobile apps, AI/ML solutions and cloud infrastructure. Serving Belagavi, Belgaum and clients worldwide.',
+  canonical: 'https://coderise.dev/',
+  ogImage: 'https://coderise.dev/og-image.jpg',
+  twitterHandle: '@coderise',
+  siteName: 'CodeRise',
 };
 
 export const pageSEO: Record<string, { title: string; description: string; canonical: string }> = {
   home: {
-    title: 'VELTRICKS — IT & Software Company in Belagavi Belgaum | Web, Mobile, AI & Cloud',
+    title: 'CodeRise — IT & Software Company in Belagavi Belgaum | Web, Mobile, AI & Cloud',
     description:
       'Top IT and software development company in Belagavi (Belgaum), Karnataka. Web development, mobile apps, AI/ML, cloud & DevOps. Hiring in Belagavi. Contact us today.',
-    canonical: 'https://veltricks.dev/',
+    canonical: 'https://coderise.dev/',
   },
   blog: {
-    title: 'Blog — Tech Insights & Tutorials | VELTRICKS Belagavi',
+    title: 'Blog — Tech Insights & Tutorials | CodeRise Belagavi',
     description:
-      'Expert articles on web development, mobile apps, AI/ML and cloud from VELTRICKS — IT company based in Belagavi, Karnataka.',
-    canonical: 'https://veltricks.dev/blog',
+      'Expert articles on web development, mobile apps, AI/ML and cloud from CodeRise — IT company based in Belagavi, Karnataka.',
+    canonical: 'https://coderise.dev/blog',
   },
 };
 
@@ -27,17 +27,17 @@ export const pageSEO: Record<string, { title: string; description: string; canon
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'VELTRICKS',
-  alternateName: ['Veltricks Software', 'Veltricks Belagavi', 'Veltricks Belgaum'],
-  url: 'https://veltricks.dev',
+  name: 'CodeRise',
+  alternateName: ['CodeRise Software', 'CodeRise Belagavi', 'CodeRise Belgaum'],
+  url: 'https://coderise.dev',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://veltricks.dev/favicon.svg',
+    url: 'https://coderise.dev/favicon.svg',
     width: 512,
     height: 512,
   },
   description:
-    'VELTRICKS is a premium IT and software development company in Belagavi (Belgaum), Karnataka, India. We offer web development, mobile app development, AI/ML solutions, cloud infrastructure and UI/UX design.',
+    'CodeRise is a premium IT and software development company in Belagavi (Belgaum), Karnataka, India. We offer web development, mobile app development, AI/ML solutions, cloud infrastructure and UI/UX design.',
   foundingDate: '2024',
   address: {
     '@type': 'PostalAddress',
@@ -51,16 +51,16 @@ export const organizationSchema = {
       '@type': 'ContactPoint',
       telephone: '+91-8310659343',
       contactType: 'customer service',
-      email: 'hello@veltricks.dev',
+      email: 'hello@coderise.dev',
       availableLanguage: ['English', 'Hindi', 'Kannada'],
       areaServed: ['Belagavi', 'Karnataka', 'India', 'Worldwide'],
     },
   ],
   sameAs: [
-    'https://linkedin.com/company/veltricks',
-    'https://github.com/veltricks',
-    'https://twitter.com/veltricks',
-    'https://instagram.com/veltricks',
+    'https://linkedin.com/company/coderise',
+    'https://github.com/coderise',
+    'https://twitter.com/coderise',
+    'https://instagram.com/coderise',
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -137,10 +137,10 @@ export const faqSchema = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Is VELTRICKS an IT company in Belagavi?',
+      name: 'Is CodeRise an IT company in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. VELTRICKS is an IT and software development company based in Belagavi (also known as Belgaum), Karnataka, India. We serve local businesses in Belagavi as well as clients across India and worldwide.',
+        text: 'Yes. CodeRise is an IT and software development company based in Belagavi (also known as Belgaum), Karnataka, India. We serve local businesses in Belagavi as well as clients across India and worldwide.',
       },
     },
     {
@@ -148,23 +148,23 @@ export const faqSchema = {
       name: 'Which software companies are in Belgaum Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'VELTRICKS is one of the leading software development companies in Belagavi (Belgaum), Karnataka. We specialize in web development, mobile apps, AI/ML solutions and cloud infrastructure.',
+        text: 'CodeRise is one of the leading software development companies in Belagavi (Belgaum), Karnataka. We specialize in web development, mobile apps, AI/ML solutions and cloud infrastructure.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Is VELTRICKS hiring in Belagavi?',
+      name: 'Is CodeRise hiring in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes, VELTRICKS is actively hiring developers, designers and tech professionals in Belagavi, Karnataka. Contact us at hello@veltricks.dev or visit veltricks.dev to learn about open opportunities.',
+        text: 'Yes, CodeRise is actively hiring developers, designers and tech professionals in Belagavi, Karnataka. Contact us at hello@coderise.dev or visit coderise.dev to learn about open opportunities.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What IT services does VELTRICKS offer in Belagavi?',
+      name: 'What IT services does CodeRise offer in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'VELTRICKS offers web development, mobile app development, AI & ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services in Belagavi, Belgaum and across Karnataka.',
+        text: 'CodeRise offers web development, mobile app development, AI & ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services in Belagavi, Belgaum and across Karnataka.',
       },
     },
     {
@@ -172,23 +172,23 @@ export const faqSchema = {
       name: 'How do I contact the best software company in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'You can reach VELTRICKS — a top software development company in Belagavi — by emailing hello@veltricks.dev, calling +91-8310659343, or filling out the contact form at veltricks.dev.',
+        text: 'You can reach CodeRise — a top software development company in Belagavi — by emailing hello@coderise.dev, calling +91-8310659343, or filling out the contact form at coderise.dev.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What services does VELTRICKS offer?',
+      name: 'What services does CodeRise offer?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'VELTRICKS offers web development, mobile app development (iOS & Android), AI/ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services.',
+        text: 'CodeRise offers web development, mobile app development (iOS & Android), AI/ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How much does software development cost at VELTRICKS?',
+      name: 'How much does software development cost at CodeRise?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Project costs vary based on scope. VELTRICKS works with budgets starting from ₹50,000 for smaller projects up to ₹10,00,000+ for enterprise solutions. Contact us for a free estimate.',
+        text: 'Project costs vary based on scope. CodeRise works with budgets starting from ₹50,000 for smaller projects up to ₹10,00,000+ for enterprise solutions. Contact us for a free estimate.',
       },
     },
   ],

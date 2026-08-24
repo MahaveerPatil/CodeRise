@@ -29,7 +29,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
     <div className="min-h-screen bg-bg-base flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <span className="font-display font-bold text-3xl gradient-text">VELTRICKS</span>
+          <span className="font-display font-bold text-3xl gradient-text">CodeRise</span>
           <p className="text-text-muted text-sm mt-1">Admin Dashboard</p>
         </div>
         <div className="p-8 rounded-2xl border border-border-subtle bg-bg-card">
@@ -112,12 +112,12 @@ export default function AdminPage() {
 
   return (
     <>
-      <SEOHead title="Admin — VELTRICKS" />
+      <SEOHead title="Admin — CodeRise" />
       <div className="min-h-screen bg-bg-base text-text-primary">
         {/* Header */}
         <header className="sticky top-0 z-10 border-b border-border-subtle bg-bg-surface/90 backdrop-blur-md px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="font-display font-bold text-xl gradient-text">VELTRICKS</span>
+            <span className="font-display font-bold text-xl gradient-text">CodeRise</span>
             <span className="text-text-muted text-sm border border-border-subtle rounded-full px-2 py-0.5 text-xs">Admin</span>
           </div>
           <div className="flex items-center gap-4">
@@ -219,7 +219,7 @@ export default function AdminPage() {
                     </button>
                   </div>
 
-                  <a href={`mailto:${selected.email}?subject=Re: Your VELTRICKS Project Inquiry&body=Hi ${selected.name},%0D%0A%0D%0AThank you for reaching out!%0D%0A%0D%0A`}
+                  <a href={`mailto:${selected.email}?subject=Re: Your CodeRise Project Inquiry&body=Hi ${selected.name},%0D%0A%0D%0AThank you for reaching out!%0D%0A%0D%0A`}
                     className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-brand-primary text-brand-primary text-sm font-medium hover:bg-brand-primary/5 transition-colors">
                     ✉ Reply via Email
                   </a>

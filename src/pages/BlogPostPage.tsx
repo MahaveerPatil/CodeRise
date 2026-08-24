@@ -42,9 +42,9 @@ export default function BlogPostPage() {
   return (
     <>
       <SEOHead
-        title={`${post.title} — VELTRICKS Blog`}
+        title={`${post.title} — CodeRise Blog`}
         description={post.excerpt || post.title}
-        canonical={`https://veltricks.dev/blog/${post.slug}`}
+        canonical={`https://coderise.dev/blog/${post.slug}`}
       />
       <main id="main" className="min-h-screen bg-bg-base pt-24 pb-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,7 +80,7 @@ export default function BlogPostPage() {
               onClick={() => { navigate('/'); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100); }}
               className="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-brand-primary to-brand-accent text-white hover:shadow-glow transition-all text-sm"
             >
-              Start a Project with VELTRICKS →
+              Start a Project with CodeRise →
             </button>
           </div>
         </div>

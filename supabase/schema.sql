@@ -1,5 +1,5 @@
 -- ============================================================
--- VELTRICKS Database Schema
+-- CodeRise Database Schema
 -- Run this in Supabase SQL Editor (Dashboard > SQL Editor > New Query)
 -- ============================================================
 

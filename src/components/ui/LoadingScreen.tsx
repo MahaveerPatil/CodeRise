@@ -13,11 +13,11 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           className="fixed inset-0 z-[9000] flex flex-col items-center justify-center bg-bg-base"
-          aria-label="Loading VELTRICKS"
+          aria-label="Loading CodeRise"
           role="status"
           aria-live="polite"
         >
-          {/* VELTRICKS wordmark with draw-in animation */}
+          {/* CodeRise wordmark with draw-in animation */}
           <div className="mb-8">
             <svg width="280" height="56" viewBox="0 0 280 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <motion.text
@@ -32,7 +32,7 @@ export function LoadingScreen({ isVisible }: LoadingScreenProps) {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                VELTRICKS
+                CODERISE
               </motion.text>
               <defs>
                 <linearGradient id="loadGrad" x1="0" y1="0" x2="280" y2="0" gradientUnits="userSpaceOnUse">

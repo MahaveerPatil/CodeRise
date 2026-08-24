@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "veltrix-website",
+  "name": "coderise-website",
   "compatibility_date": "2026-08-15",
   "observability": {
     "enabled": true

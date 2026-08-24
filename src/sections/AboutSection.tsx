@@ -30,14 +30,14 @@ export function AboutSection() {
       id="about"
       ref={ref}
       className="relative py-24 bg-bg-surface blue-accent-bg"
-      aria-label="About VELTRICKS"
+      aria-label="About CodeRise"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <SectionHeading
             label="ABOUT US"
             title="We're Building More Than [Software]."
-            subtitle="VELTRICKS is a premium software development company focused on turning business ideas into digital products that work — beautifully, reliably, and at scale."
+            subtitle="CodeRise is a premium software development company focused on turning business ideas into digital products that work — beautifully, reliably, and at scale."
             align="center"
           />
         </div>
@@ -81,13 +81,13 @@ export function AboutSection() {
                 <h3 className="font-display font-bold text-xl text-text-primary mb-1">
                   [Varadaraj Patil]
                 </h3>
-                <p className="text-brand-primary text-sm font-medium mb-1">Founder &amp; CEO, VELTRICKS</p>
+                <p className="text-brand-primary text-sm font-medium mb-1">Founder &amp; CEO, CodeRise</p>
                 <p className="text-text-muted text-xs font-mono mb-6">Replace with actual founder details</p>
 
                 {/* Bio */}
                 <p className="text-text-secondary text-sm leading-relaxed">
                   A passionate technologist and entrepreneur with a vision to make world-class software
-                  development accessible to businesses of all sizes. Founded VELTRICKS to bridge the gap
+                  development accessible to businesses of all sizes. Founded CodeRise to bridge the gap
                   between ambitious business ideas and the technology needed to bring them to life.
                 </p>
 

@@ -32,9 +32,9 @@ export default function BlogPage() {
   return (
     <>
       <SEOHead
-        title="Blog — VELTRICKS"
-        description="Technology insights, case studies, and development articles from the VELTRICKS team."
-        canonical="https://veltricks.dev/blog"
+        title="Blog — CodeRise"
+        description="Technology insights, case studies, and development articles from the CodeRise team."
+        canonical="https://coderise.dev/blog"
       />
       <main id="main" className="min-h-screen bg-bg-base pt-24 pb-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +42,7 @@ export default function BlogPage() {
             <SectionHeading
               label="BLOG"
               title="Insights & [Articles]"
-              subtitle="Technology insights, case studies, and development articles from the VELTRICKS team."
+              subtitle="Technology insights, case studies, and development articles from the CodeRise team."
               align="center"
             />
           </div>
