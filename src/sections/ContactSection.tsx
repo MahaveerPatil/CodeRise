@@ -8,7 +8,7 @@ import { useInView } from '../hooks/useInView';
 const contactInfo = [
   { icon: '📧', label: 'Email', value: 'hello@coderise.com', href: 'mailto:hello@coderise.com' },
   { icon: '📞', label: 'Phone', value: '+91 8310659343', href: 'tel:+918310659343' },
-  { icon: '📍', label: 'Location', value: 'India · Remote Worldwide', href: undefined },
+  { icon: '📍', label: 'Location', value: 'Devaki Lodge, Kakatiyas, Belagavi 590001', href: undefined },
 ];
 
 const socialLinks = [
@@ -143,7 +143,7 @@ export function ContactSection() {
           <div className="rounded-2xl overflow-hidden border border-border-subtle">
             <iframe
               title="CodeRise location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
+              src="https://maps.google.com/maps?q=Devaki+Lodge,+Kakatiyas,+Belagavi,+Karnataka+590001,+India&output=embed"
               width="100%"
               height="280"
               style={{ border: 0, display: 'block', filter: 'invert(90%) hue-rotate(180deg)' }}

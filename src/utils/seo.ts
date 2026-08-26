@@ -41,6 +41,7 @@ export const organizationSchema = {
   foundingDate: '2024',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Devaki Lodge, Kakatiyas',
     addressLocality: 'Belagavi',
     addressRegion: 'Karnataka',
     postalCode: '590001',
