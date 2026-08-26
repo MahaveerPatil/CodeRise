@@ -46,7 +46,7 @@ export function HeroSection() {
           transition={{ delay: reducedMotion ? 0 : 0.2 }}
         >
           We Build{' '}
-          <span className="gradient-text">Digital Experiences</span>
+          <span className="gradient-text">Technology</span>
           {' '}That Move Businesses Forward.
         </motion.h1>
 
