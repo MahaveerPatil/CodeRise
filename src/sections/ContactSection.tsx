@@ -116,23 +116,6 @@ export function ContactSection() {
                 ))}
               </div>
             </div>
-
-            {/* Map */}
-            <div>
-              <p className="text-xs font-mono text-text-muted uppercase tracking-widest mb-4">Find Us</p>
-              <div className="rounded-xl overflow-hidden border border-border-subtle">
-                <iframe
-                  title="CodeRise location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
-                  width="100%"
-                  height="200"
-                  style={{ border: 0, display: 'block', filter: 'invert(90%) hue-rotate(180deg)' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            </div>
           </motion.div>
 
           {/* Right column: Contact form */}
@@ -147,6 +130,29 @@ export function ContactSection() {
             </GlowCard>
           </motion.div>
         </div>
+
+        {/* Map — full width below the two columns */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          transition={{ delay: 0.3 }}
+          className="mt-12"
+        >
+          <p className="text-xs font-mono text-text-muted uppercase tracking-widest mb-4">Find Us</p>
+          <div className="rounded-2xl overflow-hidden border border-border-subtle">
+            <iframe
+              title="CodeRise location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
+              width="100%"
+              height="280"
+              style={{ border: 0, display: 'block', filter: 'invert(90%) hue-rotate(180deg)' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
