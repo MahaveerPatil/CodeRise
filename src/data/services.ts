@@ -41,14 +41,6 @@ export const services: Service[] = [
     expandedContent: 'From predictive analytics to LLM-powered automation — we build AI solutions that create measurable business value.',
   },
   {
-    id: 'cloud-devops',
-    icon: '☁️',
-    title: 'Cloud & DevOps',
-    description: 'Cloud infrastructure, CI/CD, Docker, deployment and scalable systems.',
-    tags: ['AWS', 'Azure', 'Docker', 'Kubernetes'],
-    expandedContent: 'Reliable, scalable cloud infrastructure with automated deployments, monitoring, and security best practices.',
-  },
-  {
     id: 'ecommerce',
     icon: '🛒',
     title: 'E-Commerce',

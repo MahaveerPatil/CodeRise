@@ -26,7 +26,7 @@ export const solutions: Solution[] = [
     name: 'Growing Companies',
     description: 'Automate processes and scale technology.',
     icon: '📈',
-    services: ['Software Development', 'Cloud & DevOps', 'AI & Machine Learning', 'Integrations'],
+    services: ['Software Development', 'AI & Machine Learning', 'Integrations', 'Automation'],
   },
   {
     id: 'enterprises',

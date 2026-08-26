@@ -12,7 +12,7 @@ export const pageSEO: Record<string, { title: string; description: string; canon
   home: {
     title: 'CodeRise — IT & Software Company in Belagavi Belgaum | Web, Mobile, AI & Cloud',
     description:
-      'Top IT and software development company in Belagavi (Belgaum), Karnataka. Web development, mobile apps, AI/ML, cloud & DevOps. Hiring in Belagavi. Contact us today.',
+      'Top IT and software development company in Belagavi (Belgaum), Karnataka. Web development, mobile apps, AI/ML solutions and custom software. Hiring in Belagavi. Contact us today.',
     canonical: 'https://coderise.com/',
   },
   blog: {
@@ -96,14 +96,6 @@ export const organizationSchema = {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Cloud & DevOps',
-          description: 'Cloud infrastructure and DevOps services — AWS, Azure, Docker, Kubernetes.',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
           name: 'Custom Software Development Belagavi',
           description:
             'Custom software solutions for businesses in Belagavi and Belgaum, Karnataka.',
@@ -164,7 +156,7 @@ export const faqSchema = {
       name: 'What IT services does CodeRise offer in Belagavi?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'CodeRise offers web development, mobile app development, AI & ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services in Belagavi, Belgaum and across Karnataka.',
+        text: 'CodeRise offers web development, mobile app development, AI & ML solutions, custom software development, e-commerce stores and UI/UX design services in Belagavi, Belgaum and across Karnataka.',
       },
     },
     {
@@ -180,7 +172,7 @@ export const faqSchema = {
       name: 'What services does CodeRise offer?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'CodeRise offers web development, mobile app development (iOS & Android), AI/ML solutions, cloud & DevOps, custom software development, e-commerce stores and UI/UX design services.',
+        text: 'CodeRise offers web development, mobile app development (iOS & Android), AI/ML solutions, custom software development, e-commerce stores and UI/UX design services.',
       },
     },
     {

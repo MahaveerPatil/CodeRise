@@ -293,7 +293,6 @@ export function ContactForm() {
             <option value="web-app">Web Application</option>
             <option value="mobile">Mobile App</option>
             <option value="ai-ml">AI / ML</option>
-            <option value="cloud-devops">Cloud &amp; DevOps</option>
             <option value="ecommerce">E-Commerce</option>
             <option value="software">Software Development</option>
             <option value="other">Other</option>

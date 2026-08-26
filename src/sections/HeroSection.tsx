@@ -58,7 +58,7 @@ export function HeroSection() {
           animate="visible"
           transition={{ delay: reducedMotion ? 0 : 0.6 }}
         >
-          From powerful websites and scalable software to cloud, AI and DevOps solutions — we turn ambitious ideas into technology that works.
+          From powerful websites and scalable software to AI and intelligent automation — we turn ambitious ideas into technology that works.
         </motion.p>
 
         {/* CTA Buttons */}
