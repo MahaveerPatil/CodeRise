@@ -1,19 +1,26 @@
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { GlowOrb } from '../components/effects/GlowOrb';
 import { Button } from '../components/ui/Button';
 import { fadeUp, staggerContainer } from '../utils/animations';
 import { useInView } from '../hooks/useInView';
 
-const scrollToContact = () => {
-  const el = document.getElementById('contact');
-  if (el) {
-    const top = el.getBoundingClientRect().top + window.scrollY - 84;
-    window.scrollTo({ top, behavior: 'smooth' });
-  }
-};
-
 export function CTASection() {
   const [ref, inView] = useInView<HTMLElement>();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const scrollToContact = () => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: 'contact' } });
+    } else {
+      const el = document.getElementById('contact');
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 84;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <section

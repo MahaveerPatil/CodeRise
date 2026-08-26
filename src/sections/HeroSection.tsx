@@ -47,7 +47,7 @@ export function HeroSection() {
         >
           We Build{' '}
           <span className="gradient-text">Technology</span>
-          {' '}That Move Businesses Forward.
+          {' '}That Moves Businesses Forward.
         </motion.h1>
 
         {/* Supporting text */}

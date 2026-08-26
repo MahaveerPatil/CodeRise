@@ -79,10 +79,9 @@ export function AboutSection() {
 
                 {/* Name placeholder */}
                 <h3 className="font-display font-bold text-xl text-text-primary mb-1">
-                  [Varadaraj Patil]
+                  Varadaraj Patil
                 </h3>
-                <p className="text-brand-primary text-sm font-medium mb-1">Founder &amp; CEO, CodeRise</p>
-                <p className="text-text-muted text-xs font-mono mb-6">Replace with actual founder details</p>
+                <p className="text-brand-primary text-sm font-medium mb-6">Founder &amp; CEO, CodeRise</p>
 
                 {/* Bio */}
                 <p className="text-text-secondary text-sm leading-relaxed">

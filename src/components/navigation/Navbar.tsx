@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { navLinks } from '../../data/navigation';
 import { cn } from '../../utils/cn';
 
@@ -12,6 +13,8 @@ interface NavbarProps {
 
 export function Navbar({ onMenuToggle, isMenuOpen }: NavbarProps) {
   const [scrollState, setScrollState] = useState<ScrollState>('transparent');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,15 +28,36 @@ export function Navbar({ onMenuToggle, isMenuOpen }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    const id = href.replace('#', '');
+  const scrollToId = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const offset = 84; // navbar height + buffer
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      const top = el.getBoundingClientRect().top + window.scrollY - 84;
       window.scrollTo({ top, behavior: 'smooth' });
     }
   };
+
+  const handleNavClick = (href: string) => {
+    const id = href.replace('#', '');
+    if (location.pathname !== '/') {
+      // Navigate home first, then scroll after the page renders
+      navigate('/', { state: { scrollTo: id } });
+    } else {
+      scrollToId(id);
+    }
+  };
+
+  // After navigating to home, perform the deferred scroll
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string } | null;
+    if (location.pathname === '/' && state?.scrollTo) {
+      const id = state.scrollTo;
+      // Small delay to let the page render
+      const t = setTimeout(() => scrollToId(id), 100);
+      // Clear the state so it doesn't re-fire
+      navigate('/', { replace: true, state: {} });
+      return () => clearTimeout(t);
+    }
+  }, [location, navigate]);
 
   const bgClass = {
     transparent: 'bg-transparent',

@@ -60,7 +60,7 @@ export function TestimonialsSection() {
           <SectionHeading
             label="CLIENT STORIES"
             title="What [Clients] Say"
-            subtitle="Placeholder testimonials — replace with real client feedback before launch."
+            subtitle="Real results from real clients — see what working with CodeRise looks like."
             align="center"
           />
         </div>

@@ -52,11 +52,6 @@ export function StatsSection() {
       <div className="absolute inset-0 bg-bg-base/40" aria-hidden="true" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-white/60 text-xs font-mono tracking-widest uppercase">
-            ⚠ Placeholder values — update with real data before launch
-          </p>
-        </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, index) => (
             <StatItem

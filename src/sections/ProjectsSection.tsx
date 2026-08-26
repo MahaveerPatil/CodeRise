@@ -8,6 +8,8 @@ import { useInView } from '../hooks/useInView';
 export function ProjectsSection() {
   const [ref, inView] = useInView<HTMLElement>();
 
+  if (!projects.length) return null;
+
   const [featuredProject, ...remainingProjects] = projects;
 
   return (

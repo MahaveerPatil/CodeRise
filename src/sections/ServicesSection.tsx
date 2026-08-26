@@ -20,7 +20,7 @@ export function ServicesSection() {
           <SectionHeading
             label="WHAT WE BUILD"
             title="[Technology] Solutions Designed Around Your Business"
-            subtitle="Technology solutions designed around your business, your customers, and your future."
+            subtitle="Built for scale, designed for your customers, and tailored to your business goals."
             align="center"
           />
         </div>
