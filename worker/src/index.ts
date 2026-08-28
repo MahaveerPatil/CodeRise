@@ -238,12 +238,64 @@ export default {
       if (url.pathname === '/admin/auth/forgot-password' && request.method === 'POST') {
         const { email } = await request.json() as { email?: string };
         if (!email) return json({ error: 'Email is required' }, 400, cors);
-        // Supabase sends the reset email — redirect to production admin reset page
-        await fetch(`${env.SUPABASE_URL}/auth/v1/recover`, {
-          method: 'POST',
-          headers: { apikey: env.SUPABASE_SERVICE_KEY, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, gotrue_meta_security: {}, redirectTo: 'https://coderise.in/admin/reset-password' }),
-        });
+
+        try {
+          // Use Supabase Admin API to generate a password reset link (service key required)
+          const linkRes = await fetch(`${env.SUPABASE_URL}/auth/v1/admin/generate_link`, {
+            method: 'POST',
+            headers: {
+              apikey: env.SUPABASE_SERVICE_KEY,
+              Authorization: `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              type: 'recovery',
+              email,
+              options: { redirect_to: 'https://coderise.in/admin/reset-password' },
+            }),
+          });
+
+          if (linkRes.ok) {
+            const linkData = await linkRes.json() as { action_link?: string; properties?: { action_link?: string } };
+            const resetLink = linkData.action_link || linkData.properties?.action_link;
+
+            if (resetLink) {
+              // Send via Resend so delivery is guaranteed
+              await sendEmail(
+                env,
+                email,
+                'Reset your CodeRise Admin password',
+                `
+                <div style="font-family:sans-serif;max-width:520px;margin:auto;padding:32px;background:#0f0d14;color:#f5f0ff;border-radius:12px;border:1px solid rgba(255,107,107,0.2)">
+                  <h2 style="color:#FF6B6B;margin-top:0">Password Reset Request</h2>
+                  <p style="line-height:1.7;color:#a899c0">
+                    You requested a password reset for your <strong style="color:#f5f0ff">CodeRise Admin</strong> account.
+                  </p>
+                  <p style="line-height:1.7;color:#a899c0">
+                    Click the button below to set a new password. This link expires in <strong style="color:#f5f0ff">1 hour</strong>.
+                  </p>
+                  <div style="text-align:center;margin:28px 0">
+                    <a href="${resetLink}" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#FF6B6B,#FF8E53);color:#fff;font-weight:700;font-size:15px;border-radius:10px;text-decoration:none">
+                      Reset Password
+                    </a>
+                  </div>
+                  <p style="font-size:12px;color:#a899c0;line-height:1.6">
+                    If you didn't request this, you can safely ignore this email. Your password won't change.
+                  </p>
+                  <hr style="border-color:rgba(255,107,107,0.15);margin:20px 0"/>
+                  <p style="font-size:11px;color:#6b5e7c;margin:0">
+                    If the button doesn't work, copy and paste this link:<br/>
+                    <a href="${resetLink}" style="color:#FF6B6B;word-break:break-all">${resetLink}</a>
+                  </p>
+                </div>
+                `
+              );
+            }
+          }
+        } catch (e) {
+          console.error('Forgot password error:', e);
+        }
+
         // Always return success to avoid email enumeration
         return json({ success: true }, 200, cors);
       }
