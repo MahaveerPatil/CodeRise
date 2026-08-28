@@ -11,11 +11,11 @@ CORS_ORIGINS = "https://coderise.in,https://www.coderise.in,https://coderise-web
 # To provision, run:
 #   cd worker && npx wrangler kv namespace create RATE_LIMIT
 #   cd worker && npx wrangler kv namespace create RATE_LIMIT --preview
-# Then replace the placeholder IDs below with the IDs from the output.
-[[kv_namespaces]]
-binding = "RATE_LIMIT"
-id = "REPLACE_WITH_PRODUCTION_KV_NAMESPACE_ID"
-preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
+# Then uncomment the block below and replace the placeholder IDs.
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "REPLACE_WITH_PRODUCTION_KV_NAMESPACE_ID"
+# preview_id = "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
 
 # Secrets - set with: wrangler secret put RESEND_API_KEY
 # wrangler secret put SUPABASE_SERVICE_KEY

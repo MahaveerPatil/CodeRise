@@ -4,7 +4,7 @@ interface Env {
   SUPABASE_SERVICE_KEY: string;
   ADMIN_EMAIL: string;
   CORS_ORIGINS: string;
-  RATE_LIMIT: KVNamespace;
+  RATE_LIMIT?: KVNamespace;
 }
 
 function corsHeaders(origin: string, allowedOrigins: string): Record<string, string> {
@@ -117,7 +117,9 @@ export default {
       // ── POST /inquiries ─────────────────────────────────────────
       if (url.pathname === '/inquiries' && request.method === 'POST') {
         const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-        const allowed = await checkRateLimit(env.RATE_LIMIT, ip, 'POST_inquiries', 5, 3600).catch(() => true);
+        const allowed = env.RATE_LIMIT
+          ? await checkRateLimit(env.RATE_LIMIT, ip, 'POST_inquiries', 5, 3600).catch(() => true)
+          : true;
         if (!allowed) {
           return json({ error: 'Too many requests. Please try again later.' }, 429, { ...cors, 'Retry-After': '3600' });
         }
