@@ -29,6 +29,14 @@ createRoot(document.getElementById('root')!).render(
             </Suspense>
           }
         />
+        <Route
+          path="/admin/reset-password"
+          element={
+            <Suspense fallback={<LoadingFallback />}>
+              <AdminPage resetMode />
+            </Suspense>
+          }
+        />
         {/* Main site */}
         <Route path="/" element={<RootLayout />}>
           <Route index element={<HomePage />} />

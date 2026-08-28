@@ -214,15 +214,35 @@ export default {
         return json({ status: 'ok', service: 'coderise-api' }, 200, cors);
       }
 
+      // ── POST /admin/auth/update-password ────────────────────────
+      if (url.pathname === '/admin/auth/update-password' && request.method === 'POST') {
+        const authHeader = request.headers.get('Authorization');
+        if (!authHeader?.startsWith('Bearer ')) return json({ error: 'Missing token' }, 401, cors);
+        const token = authHeader.slice(7);
+        const { password } = await request.json() as { password?: string };
+        if (!password || password.length < 8) return json({ error: 'Password must be at least 8 characters' }, 400, cors);
+        const res = await fetch(`${env.SUPABASE_URL}/auth/v1/user`, {
+          method: 'PUT',
+          headers: {
+            apikey: env.SUPABASE_SERVICE_KEY,
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ password }),
+        });
+        if (!res.ok) return json({ error: 'Failed to update password. The link may have expired.' }, 400, cors);
+        return json({ success: true }, 200, cors);
+      }
+
       // ── POST /admin/auth/forgot-password ────────────────────────
       if (url.pathname === '/admin/auth/forgot-password' && request.method === 'POST') {
         const { email } = await request.json() as { email?: string };
         if (!email) return json({ error: 'Email is required' }, 400, cors);
-        // Supabase sends the reset email — we proxy the request server-side
+        // Supabase sends the reset email — redirect to production admin reset page
         await fetch(`${env.SUPABASE_URL}/auth/v1/recover`, {
           method: 'POST',
           headers: { apikey: env.SUPABASE_SERVICE_KEY, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, gotrue_meta_security: {}, redirectTo: 'https://coderise.in/admin/reset-password' }),
         });
         // Always return success to avoid email enumeration
         return json({ success: true }, 200, cors);

@@ -187,7 +187,113 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
   );
 }
 
-export default function AdminPage() {
+// ── Reset Password Page (handles Supabase recovery token from URL hash) ──────
+function ResetPasswordPage() {
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+
+  // Extract access_token from URL hash e.g. #access_token=...&type=recovery
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const accessToken = hashParams.get('access_token');
+  const tokenType = hashParams.get('type');
+
+  const isValidRecovery = accessToken && tokenType === 'recovery';
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== confirm) { setMessage('Passwords do not match.'); setStatus('error'); return; }
+    if (password.length < 8) { setMessage('Password must be at least 8 characters.'); setStatus('error'); return; }
+    setStatus('loading');
+    setMessage('');
+    try {
+      const res = await fetch(`${WORKER_URL}/admin/auth/update-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+        body: JSON.stringify({ password }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Failed to update password' })) as { error?: string };
+        throw new Error(err.error || 'Failed to update password');
+      }
+      setStatus('success');
+      // Clear the hash so the token can't be reused
+      window.history.replaceState(null, '', '/admin');
+    } catch (err) {
+      setStatus('error');
+      setMessage(err instanceof Error ? err.message : 'Failed to update password');
+    }
+  };
+
+  const inputClass = 'w-full px-4 py-3 rounded-lg bg-bg-elevated border border-border-subtle text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary';
+
+  return (
+    <div className="min-h-screen bg-bg-base flex items-center justify-center px-4">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <span className="font-display font-bold text-3xl gradient-text">CodeRise</span>
+          <p className="text-text-muted text-sm mt-1">Admin Dashboard</p>
+        </div>
+        <div className="p-8 rounded-2xl border border-border-subtle bg-bg-card">
+          {!isValidRecovery ? (
+            <div className="text-center py-4">
+              <div className="w-14 h-14 rounded-full bg-error/15 border border-error/30 flex items-center justify-center mx-auto mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h2 className="font-display font-bold text-lg text-text-primary mb-2">Invalid Reset Link</h2>
+              <p className="text-text-muted text-sm mb-5">This link is invalid or has expired. Please request a new one.</p>
+              <a href="/admin" className="text-sm text-brand-primary hover:underline">← Back to login</a>
+            </div>
+          ) : status === 'success' ? (
+            <div className="text-center py-4">
+              <div className="w-14 h-14 rounded-full bg-success/15 border border-success/30 flex items-center justify-center mx-auto mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h2 className="font-display font-bold text-lg text-text-primary mb-2">Password Updated!</h2>
+              <p className="text-text-muted text-sm mb-5">Your password has been changed. You can now sign in.</p>
+              <a href="/admin" className="text-sm text-brand-primary hover:underline">← Go to login</a>
+            </div>
+          ) : (
+            <>
+              <h2 className="font-display font-bold text-lg text-text-primary mb-1">Set new password</h2>
+              <p className="text-text-muted text-sm mb-5">Choose a strong password for your admin account.</p>
+              {status === 'error' && message && (
+                <div className="mb-4 p-3 rounded-lg bg-error/10 border border-error/30 text-error text-sm">{message}</div>
+              )}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1.5">New Password</label>
+                  <input type="password" value={password} onChange={e => setPassword(e.target.value)}
+                    required minLength={8} placeholder="Min. 8 characters" className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1.5">Confirm Password</label>
+                  <input type="password" value={confirm} onChange={e => setConfirm(e.target.value)}
+                    required minLength={8} placeholder="Repeat your password" className={inputClass} />
+                </div>
+                <button type="submit" disabled={status === 'loading'}
+                  className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-brand-primary to-brand-accent text-white hover:shadow-glow transition-all disabled:opacity-70">
+                  {status === 'loading' ? 'Updating...' : 'Update Password'}
+                </button>
+              </form>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function AdminPage({ resetMode }: { resetMode?: boolean }) {
+  // If Supabase redirected here with a recovery token in the hash, show reset UI
+  if (resetMode || window.location.hash.includes('type=recovery')) {
+    return <ResetPasswordPage />;
+  }
   const [authed, setAuthed] = useState(false);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [selected, setSelected] = useState<Inquiry | null>(null);
