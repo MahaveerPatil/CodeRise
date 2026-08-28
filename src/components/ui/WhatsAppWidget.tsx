@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER as string) || '918310659343';
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined;
 const MESSAGE = encodeURIComponent("Hi CodeRise! I'd like to discuss a project with you.");
 
 export function WhatsAppWidget() {
   const [showTip, setShowTip] = useState(false);
+
+  if (!WHATSAPP_NUMBER) return null;
+
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${MESSAGE}`;
 
   return (

@@ -5,6 +5,7 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Robots-Tag: index, follow
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://coderise-api.pmahaveer832.workers.dev; img-src 'self' data: https:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
@@ -21,3 +22,7 @@
 
 /robots.txt
   Cache-Control: public, max-age=86400
+
+/admin
+  X-Robots-Tag: noindex, nofollow
+  Basic-Auth: $ADMIN_BASIC_AUTH_USER:$ADMIN_BASIC_AUTH_HASH

@@ -34,24 +34,15 @@ const initialData: FormData = {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const FIELD_MAX = { name: 100, email: 254, description: 2000, company: 200, phone: 20 } as const;
+
 // Calls the Cloudflare Worker API — swap VITE_CLOUDFLARE_WORKER_URL in .env for production
 async function submitForm(data: FormData): Promise<void> {
-  const workerUrl = (import.meta.env.VITE_CLOUDFLARE_WORKER_URL as string) || '';
-  const endpoint = workerUrl ? `${workerUrl}/inquiries` : null;
-
-  // If no worker URL is configured, fall back to Supabase direct insert
-  if (!endpoint) {
-    const { createClient } = await import('@supabase/supabase-js');
-    const supabase = createClient(
-      import.meta.env.VITE_SUPABASE_URL as string,
-      import.meta.env.VITE_SUPABASE_ANON_KEY as string
-    );
-    const { error } = await supabase.from('inquiries').insert([data]);
-    if (error) throw new Error(error.message);
-    return;
+  const workerUrl = import.meta.env.VITE_CLOUDFLARE_WORKER_URL as string;
+  if (!workerUrl) {
+    throw new Error('Contact form is not configured. Please email us directly at hello@coderise.com.');
   }
-
-  const res = await fetch(endpoint, {
+  const res = await fetch(`${workerUrl}/inquiries`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -88,6 +79,12 @@ export function ContactForm() {
     if ('service' in fields && !fields.service) e.service = 'Please select a service.';
     if ('description' in fields && !fields.description?.trim())
       e.description = 'Project description is required.';
+    if ('name' in fields && fields.name && fields.name.length > FIELD_MAX.name)
+      e.name = `Name must be ${FIELD_MAX.name} characters or fewer.`;
+    if ('email' in fields && fields.email && fields.email.length > FIELD_MAX.email)
+      e.email = `Email must be ${FIELD_MAX.email} characters or fewer.`;
+    if ('description' in fields && fields.description && fields.description.length > FIELD_MAX.description)
+      e.description = `Description must be ${FIELD_MAX.description} characters or fewer.`;
     return e;
   };
 
@@ -184,6 +181,7 @@ export function ContactForm() {
             type="text"
             value={data.name}
             placeholder="Your name"
+            maxLength={FIELD_MAX.name}
             onChange={(e) => handleChange('name', e.target.value)}
             onBlur={() => handleBlur('name')}
             className={fieldClass(errors.name)}
@@ -219,6 +217,7 @@ export function ContactForm() {
             type="text"
             value={data.company}
             placeholder="Company name (optional)"
+            maxLength={FIELD_MAX.company}
             onChange={(e) => handleChange('company', e.target.value)}
             className={fieldClass()}
           />
@@ -234,6 +233,7 @@ export function ContactForm() {
             type="email"
             value={data.email}
             placeholder="your@email.com"
+            maxLength={FIELD_MAX.email}
             onChange={(e) => handleChange('email', e.target.value)}
             onBlur={() => handleBlur('email')}
             className={fieldClass(errors.email)}
@@ -266,6 +266,7 @@ export function ContactForm() {
             type="tel"
             value={data.phone}
             placeholder="+91 98765 43210 (optional)"
+            maxLength={FIELD_MAX.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             className={fieldClass()}
           />
@@ -372,6 +373,7 @@ export function ContactForm() {
             rows={5}
             value={data.description}
             placeholder="Tell us about your project — what you want to build, who it's for, and what problem it solves..."
+            maxLength={FIELD_MAX.description}
             onChange={(e) => handleChange('description', e.target.value)}
             onBlur={() => handleBlur('description')}
             className={cn(fieldClass(errors.description), 'resize-y min-h-[120px]')}

@@ -4,6 +4,7 @@ interface Env {
   SUPABASE_SERVICE_KEY: string;
   ADMIN_EMAIL: string;
   CORS_ORIGINS: string;
+  RATE_LIMIT: KVNamespace;
 }
 
 function corsHeaders(origin: string, allowedOrigins: string): Record<string, string> {
@@ -68,6 +69,39 @@ async function db(env: Env, path: string, method = 'GET', body?: unknown) {
   return text ? JSON.parse(text) : null;
 }
 
+async function checkRateLimit(
+  kv: KVNamespace, ip: string, key: string, limit: number, windowSeconds: number
+): Promise<boolean> {
+  const kvKey = `rl:${key}:${ip}`;
+  const entry = await kv.get(kvKey, 'json') as { count: number; windowStart: number } | null;
+  const now = Date.now();
+  if (!entry || now - entry.windowStart > windowSeconds * 1000) {
+    await kv.put(kvKey, JSON.stringify({ count: 1, windowStart: now }), { expirationTtl: windowSeconds });
+    return true;
+  }
+  if (entry.count >= limit) return false;
+  await kv.put(kvKey, JSON.stringify({ count: entry.count + 1, windowStart: entry.windowStart }), { expirationTtl: windowSeconds });
+  return true;
+}
+
+async function requireAuth(request: Request, env: Env): Promise<Record<string, unknown> | null> {
+  const authHeader = request.headers.get('Authorization');
+  if (!authHeader?.startsWith('Bearer ')) return null;
+  const token = authHeader.slice(7);
+  try {
+    const res = await fetch(`${env.SUPABASE_URL}/auth/v1/user`, {
+      headers: {
+        apikey: env.SUPABASE_SERVICE_KEY,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!res.ok) return null;
+    return await res.json() as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -82,11 +116,25 @@ export default {
     try {
       // ── POST /inquiries ─────────────────────────────────────────
       if (url.pathname === '/inquiries' && request.method === 'POST') {
+        const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+        const allowed = await checkRateLimit(env.RATE_LIMIT, ip, 'POST_inquiries', 5, 3600).catch(() => true);
+        if (!allowed) {
+          return json({ error: 'Too many requests. Please try again later.' }, 429, { ...cors, 'Retry-After': '3600' });
+        }
+
         const body = await request.json() as Record<string, string>;
         const { name, company, email, phone, service, budget, timeline, description } = body;
 
         if (!name?.trim() || !email?.trim() || !service?.trim() || !description?.trim()) {
           return json({ error: 'Missing required fields' }, 400, cors);
+        }
+
+        const FIELD_MAX: Record<string, number> = { name: 100, email: 254, description: 2000, company: 200, phone: 20 };
+        for (const [field, max] of Object.entries(FIELD_MAX)) {
+          const val = body[field];
+          if (val && val.length > max) {
+            return json({ error: `Field "${field}" exceeds ${max} characters` }, 400, cors);
+          }
         }
 
         // Store in Supabase
@@ -164,6 +212,58 @@ export default {
       // ── Health check ─────────────────────────────────────────────
       if (url.pathname === '/health') {
         return json({ status: 'ok', service: 'coderise-api' }, 200, cors);
+      }
+
+      // ── POST /admin/auth/login ───────────────────────────────────
+      if (url.pathname === '/admin/auth/login' && request.method === 'POST') {
+        const { email, password } = await request.json() as { email?: string; password?: string };
+        if (!email || !password) return json({ error: 'Missing credentials' }, 400, cors);
+        const res = await fetch(`${env.SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+          method: 'POST',
+          headers: { apikey: env.SUPABASE_SERVICE_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+        if (!res.ok) return json({ error: 'Invalid credentials' }, 401, cors);
+        const data = await res.json() as { access_token: string; expires_at: number };
+        return json({ accessToken: data.access_token, expiresAt: data.expires_at }, 200, cors);
+      }
+
+      // ── POST /admin/auth/logout ──────────────────────────────────
+      if (url.pathname === '/admin/auth/logout' && request.method === 'POST') {
+        const authHeader = request.headers.get('Authorization');
+        if (authHeader?.startsWith('Bearer ')) {
+          const token = authHeader.slice(7);
+          await fetch(`${env.SUPABASE_URL}/auth/v1/logout`, {
+            method: 'POST',
+            headers: { apikey: env.SUPABASE_SERVICE_KEY, Authorization: `Bearer ${token}` },
+          }).catch(() => {});
+        }
+        return json({ success: true }, 200, cors);
+      }
+
+      // ── GET /admin/auth/session ──────────────────────────────────
+      if (url.pathname === '/admin/auth/session' && request.method === 'GET') {
+        const user = await requireAuth(request, env);
+        if (!user) return json({ error: 'Unauthorized' }, 401, cors);
+        return json({ valid: true }, 200, cors);
+      }
+
+      // ── GET /admin/inquiries ─────────────────────────────────────
+      if (url.pathname === '/admin/inquiries' && request.method === 'GET') {
+        const user = await requireAuth(request, env);
+        if (!user) return json({ error: 'Unauthorized' }, 401, cors);
+        const rows = await db(env, '/inquiries?order=created_at.desc');
+        return json(rows, 200, cors);
+      }
+
+      // ── PATCH /admin/inquiries/:id ───────────────────────────────
+      const adminInquiryMatch = url.pathname.match(/^\/admin\/inquiries\/([^/]+)$/);
+      if (adminInquiryMatch && request.method === 'PATCH') {
+        const user = await requireAuth(request, env);
+        if (!user) return json({ error: 'Unauthorized' }, 401, cors);
+        const body = await request.json() as { status?: string; notes?: string };
+        const rows = await db(env, `/inquiries?id=eq.${encodeURIComponent(adminInquiryMatch[1])}`, 'PATCH', body);
+        return json(rows, 200, cors);
       }
 
       return json({ error: 'Not found' }, 404, cors);

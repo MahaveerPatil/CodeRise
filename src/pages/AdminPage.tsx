@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { supabase, type Inquiry } from '../lib/supabase';
+import { WORKER_URL, type Inquiry } from '../lib/supabase';
 import { SEOHead } from '../components/seo/SEOHead';
 
 const STATUS_BADGE: Record<string, string> = {
@@ -8,6 +8,43 @@ const STATUS_BADGE: Record<string, string> = {
   replied: 'text-green-400 bg-green-400/10 border-green-400/30',
   archived: 'text-text-muted bg-bg-elevated border-border-subtle',
 };
+
+const SESSION_KEY = 'coderise_admin_session';
+
+function getToken(): string | null {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const { accessToken, expiresAt } = JSON.parse(raw) as { accessToken: string; expiresAt: number };
+    if (expiresAt && Date.now() / 1000 > expiresAt) { sessionStorage.removeItem(SESSION_KEY); return null; }
+    return accessToken;
+  } catch { return null; }
+}
+
+function setToken(accessToken: string, expiresAt: number) {
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify({ accessToken, expiresAt }));
+}
+
+function clearToken() {
+  sessionStorage.removeItem(SESSION_KEY);
+}
+
+async function api<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
+  const token = getToken();
+  const res = await fetch(`${WORKER_URL}${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: 'Request failed' })) as { error?: string };
+    throw Object.assign(new Error(err.error || 'Request failed'), { status: res.status });
+  }
+  return res.json() as Promise<T>;
+}
 
 function LoginForm({ onLogin }: { onLogin: () => void }) {
   const [email, setEmail] = useState('');
@@ -19,10 +56,17 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
     e.preventDefault();
     setLoading(true);
     setError('');
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
-    if (authError) setError(authError.message);
-    else onLogin();
-    setLoading(false);
+    try {
+      const data = await api<{ accessToken: string; expiresAt: number }>(
+        '/admin/auth/login', 'POST', { email, password }
+      );
+      setToken(data.accessToken, data.expiresAt);
+      onLogin();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Login failed');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -69,22 +113,44 @@ export default function AdminPage() {
 
   const loadInquiries = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from('inquiries').select('*').order('created_at', { ascending: false });
-    setInquiries((data as Inquiry[]) || []);
-    setLoading(false);
+    try {
+      const data = await api<Inquiry[]>('/admin/inquiries');
+      setInquiries(data || []);
+    } catch (err) {
+      if (err instanceof Error && (err as Error & { status?: number }).status === 401) {
+        clearToken();
+        setAuthed(false);
+      }
+      setInquiries([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) { setAuthed(true); loadInquiries(); }
-    });
+    const token = getToken();
+    if (token) {
+      api('/admin/auth/session')
+        .then(() => { setAuthed(true); loadInquiries(); })
+        .catch(() => { clearToken(); setLoading(false); });
+    } else {
+      setLoading(false);
+    }
   }, [loadInquiries]);
 
   const handleLogin = () => { setAuthed(true); loadInquiries(); };
-  const handleLogout = async () => { await supabase.auth.signOut(); setAuthed(false); };
+
+  const handleLogout = async () => {
+    const token = getToken();
+    if (token) {
+      await api('/admin/auth/logout', 'POST').catch(() => {});
+    }
+    clearToken();
+    setAuthed(false);
+  };
 
   const updateStatus = async (id: string, status: Inquiry['status']) => {
-    await supabase.from('inquiries').update({ status }).eq('id', id);
+    await api(`/admin/inquiries/${id}`, 'PATCH', { status });
     setInquiries(p => p.map(i => i.id === id ? { ...i, status } : i));
     if (selected?.id === id) setSelected(p => p ? { ...p, status } : null);
   };
@@ -92,7 +158,7 @@ export default function AdminPage() {
   const saveNotes = async () => {
     if (!selected) return;
     setSaving(true);
-    await supabase.from('inquiries').update({ notes }).eq('id', selected.id);
+    await api(`/admin/inquiries/${selected.id}`, 'PATCH', { notes });
     setInquiries(p => p.map(i => i.id === selected.id ? { ...i, notes } : i));
     setSelected(p => p ? { ...p, notes } : null);
     setSaving(false);
