@@ -214,6 +214,20 @@ export default {
         return json({ status: 'ok', service: 'coderise-api' }, 200, cors);
       }
 
+      // ── POST /admin/auth/forgot-password ────────────────────────
+      if (url.pathname === '/admin/auth/forgot-password' && request.method === 'POST') {
+        const { email } = await request.json() as { email?: string };
+        if (!email) return json({ error: 'Email is required' }, 400, cors);
+        // Supabase sends the reset email — we proxy the request server-side
+        await fetch(`${env.SUPABASE_URL}/auth/v1/recover`, {
+          method: 'POST',
+          headers: { apikey: env.SUPABASE_SERVICE_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        // Always return success to avoid email enumeration
+        return json({ success: true }, 200, cors);
+      }
+
       // ── POST /admin/auth/login ───────────────────────────────────
       if (url.pathname === '/admin/auth/login' && request.method === 'POST') {
         const { email, password } = await request.json() as { email?: string; password?: string };

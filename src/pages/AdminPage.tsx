@@ -46,13 +46,17 @@ async function api<T>(path: string, method = 'GET', body?: unknown): Promise<T> 
   return res.json() as Promise<T>;
 }
 
+type AuthView = 'login' | 'forgot' | 'forgot-sent';
+
 function LoginForm({ onLogin }: { onLogin: () => void }) {
+  const [view, setView] = useState<AuthView>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [resetEmail, setResetEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -69,6 +73,23 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
     }
   };
 
+  const handleForgot = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await api('/admin/auth/forgot-password', 'POST', { email: resetEmail });
+      setView('forgot-sent');
+    } catch {
+      // Show success anyway to avoid email enumeration
+      setView('forgot-sent');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const inputClass = 'w-full px-4 py-3 rounded-lg bg-bg-elevated border border-border-subtle text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary';
+
   return (
     <div className="min-h-screen bg-bg-base flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
@@ -76,26 +97,90 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
           <span className="font-display font-bold text-3xl gradient-text">CodeRise</span>
           <p className="text-text-muted text-sm mt-1">Admin Dashboard</p>
         </div>
+
         <div className="p-8 rounded-2xl border border-border-subtle bg-bg-card">
-          {error && (
-            <div className="mb-5 p-3 rounded-lg bg-error/10 border border-error/30 text-error text-sm">{error}</div>
+
+          {/* ── Login view ── */}
+          {view === 'login' && (
+            <>
+              {error && (
+                <div className="mb-5 p-3 rounded-lg bg-error/10 border border-error/30 text-error text-sm">{error}</div>
+              )}
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1.5">Email</label>
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
+                    placeholder="you@example.com" className={inputClass} />
+                </div>
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-sm font-medium text-text-secondary">Password</label>
+                    <button type="button" onClick={() => { setResetEmail(email); setError(''); setView('forgot'); }}
+                      className="text-xs text-brand-primary hover:underline">
+                      Forgot password?
+                    </button>
+                  </div>
+                  <input type="password" value={password} onChange={e => setPassword(e.target.value)} required
+                    className={inputClass} />
+                </div>
+                <button type="submit" disabled={loading}
+                  className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-brand-primary to-brand-accent text-white hover:shadow-glow transition-all disabled:opacity-70">
+                  {loading ? 'Signing in...' : 'Sign In'}
+                </button>
+              </form>
+            </>
           )}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1.5">Email</label>
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
-                className="w-full px-4 py-3 rounded-lg bg-bg-elevated border border-border-subtle text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary" />
+
+          {/* ── Forgot password view ── */}
+          {view === 'forgot' && (
+            <>
+              <button onClick={() => { setError(''); setView('login'); }}
+                className="flex items-center gap-1.5 text-xs text-text-muted hover:text-text-primary mb-5 transition-colors">
+                ← Back to login
+              </button>
+              <h2 className="font-display font-bold text-lg text-text-primary mb-1">Reset your password</h2>
+              <p className="text-text-muted text-sm mb-5">
+                Enter your admin email and we'll send a reset link.
+              </p>
+              {error && (
+                <div className="mb-5 p-3 rounded-lg bg-error/10 border border-error/30 text-error text-sm">{error}</div>
+              )}
+              <form onSubmit={handleForgot} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-text-secondary mb-1.5">Email</label>
+                  <input type="email" value={resetEmail} onChange={e => setResetEmail(e.target.value)} required
+                    placeholder="you@example.com" className={inputClass} />
+                </div>
+                <button type="submit" disabled={loading}
+                  className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-brand-primary to-brand-accent text-white hover:shadow-glow transition-all disabled:opacity-70">
+                  {loading ? 'Sending...' : 'Send Reset Link'}
+                </button>
+              </form>
+            </>
+          )}
+
+          {/* ── Reset email sent view ── */}
+          {view === 'forgot-sent' && (
+            <div className="text-center py-4">
+              <div className="w-14 h-14 rounded-full bg-success/15 border border-success/30 flex items-center justify-center mx-auto mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h2 className="font-display font-bold text-lg text-text-primary mb-2">Check your email</h2>
+              <p className="text-text-muted text-sm mb-1">
+                If <span className="text-text-primary font-medium">{resetEmail}</span> is registered,
+              </p>
+              <p className="text-text-muted text-sm mb-6">
+                you'll receive a password reset link shortly.
+              </p>
+              <button onClick={() => { setError(''); setView('login'); }}
+                className="text-sm text-brand-primary hover:underline">
+                ← Back to login
+              </button>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-text-secondary mb-1.5">Password</label>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required
-                className="w-full px-4 py-3 rounded-lg bg-bg-elevated border border-border-subtle text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary" />
-            </div>
-            <button type="submit" disabled={loading}
-              className="w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-brand-primary to-brand-accent text-white hover:shadow-glow transition-all disabled:opacity-70">
-              {loading ? 'Signing in...' : 'Sign In'}
-            </button>
-          </form>
+          )}
+
         </div>
       </div>
     </div>
