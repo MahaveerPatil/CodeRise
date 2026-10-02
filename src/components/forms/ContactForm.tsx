@@ -39,18 +39,44 @@ const FIELD_MAX = { name: 100, email: 254, description: 2000, company: 200, phon
 // Calls the Cloudflare Worker API — swap VITE_CLOUDFLARE_WORKER_URL in .env for production
 async function submitForm(data: FormData): Promise<void> {
   const workerUrl = import.meta.env.VITE_CLOUDFLARE_WORKER_URL as string;
-  if (!workerUrl) {
-    throw new Error('Contact form is not configured. Please email us directly at hello@coderise.com.');
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+  const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
+  // Primary path — Cloudflare Worker (handles email notifications too)
+  if (workerUrl) {
+    try {
+      const res = await fetch(`${workerUrl}/inquiries`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) return;
+      // Worker returned an error — fall through to direct Supabase
+      console.warn('[ContactForm] Worker returned', res.status, '— falling back to Supabase direct insert');
+    } catch (err) {
+      // Network error (worker down, CORS, etc.) — fall through
+      console.warn('[ContactForm] Worker unreachable — falling back to Supabase direct insert', err);
+    }
   }
-  const res = await fetch(`${workerUrl}/inquiries`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: 'Submission failed' })) as { error?: string };
-    throw new Error(err.error || 'Submission failed');
+
+  // Fallback — direct Supabase insert (no email notification, but data is saved)
+  if (supabaseUrl && supabaseKey) {
+    const res = await fetch(`${supabaseUrl}/rest/v1/inquiries`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': supabaseKey,
+        'Authorization': `Bearer ${supabaseKey}`,
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) return;
+    const text = await res.text().catch(() => '');
+    throw new Error(text || 'Submission failed. Please email us at hello@coderise.com');
   }
+
+  throw new Error('Form is not configured. Please email us at hello@coderise.com');
 }
 
 const fieldClass = (error?: string) =>

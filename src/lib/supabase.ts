@@ -1,13 +1,18 @@
-// Supabase types — all database operations go through the Cloudflare Worker.
-// VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are no longer used by the frontend.
-// Set SUPABASE_URL and SUPABASE_SERVICE_KEY as worker secrets:
-//   wrangler secret put SUPABASE_SERVICE_KEY (run in the worker/ directory)
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+
+if (import.meta.env.DEV && (!supabaseUrl || !supabaseAnonKey)) {
+  console.warn('[CodeRise] Supabase env vars missing. Admin panel will not work.');
+}
+
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder'
+);
 
 export const WORKER_URL = import.meta.env.VITE_CLOUDFLARE_WORKER_URL as string;
-
-if (import.meta.env.DEV && !WORKER_URL) {
-  console.warn('[CodeRise] VITE_CLOUDFLARE_WORKER_URL is not set. Admin panel and contact form will not work.');
-}
 
 export type Inquiry = {
   id: string;

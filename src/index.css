@@ -11,43 +11,32 @@
 
 /* ─── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
-  /* Gradients */
   --gradient-brand: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFD93D 100%);
-  --gradient-brand-subtle: linear-gradient(
-    135deg,
-    rgba(255, 107, 107, 0.15) 0%,
-    rgba(255, 142, 83, 0.1) 50%,
-    rgba(255, 217, 61, 0.05) 100%
-  );
+  --gradient-brand-subtle: linear-gradient(135deg, rgba(255,107,107,0.15) 0%, rgba(255,142,83,0.1) 50%, rgba(255,217,61,0.05) 100%);
   --gradient-text: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFD93D 100%);
-
-  /* Light blue accent */
+  --maroon: #8B1A1A;
+  --maroon-glow: rgba(139, 26, 26, 0.18);
   --blue-accent: rgba(100, 200, 255, 0.05);
-  --blue-accent-mid: rgba(100, 200, 255, 0.08);
-  --gradient-blue-subtle: radial-gradient(ellipse at 50% 50%, rgba(100, 200, 255, 0.07) 0%, transparent 70%);
-
-  /* Glass backgrounds */
   --glass-weak-bg: rgba(15, 13, 20, 0.6);
   --glass-medium-bg: rgba(15, 13, 20, 0.8);
   --glass-strong-bg: rgba(7, 6, 10, 0.95);
-
-  /* Shadows */
   --shadow-glow: 0 0 20px rgba(255, 107, 107, 0.35);
   --shadow-glow-strong: 0 0 40px rgba(255, 107, 107, 0.55);
 }
 
 /* ─── Global Resets & Base ───────────────────────────────────────────────── */
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   background-color: #07060A;
-  /* subtle light-blue ambient glow sitting at ~5% across the page */
+  /* Multi-layer aurora ambient — coral top-left, blue top-right, orange bottom, maroon center-bottom */
   background-image:
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(100, 200, 255, 0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 90%, rgba(80, 180, 255, 0.04) 0%, transparent 55%);
+    radial-gradient(ellipse 90% 60% at 15% 5%,  rgba(255, 107, 107, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 8%,  rgba(100, 200, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 95%, rgba(255, 142, 83,  0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 35% at 10% 90%, rgba(80,  180, 255,  0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(139, 26, 26,  0.12) 0%, transparent 60%);
   color: #F5F0FF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,27 +48,19 @@ body {
   color: #F5F0FF;
 }
 
-/* ─── Scrollbar (webkit) ─────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0F0D14;
-}
-
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #0a0406; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 107, 107, 0.4);
+  background: linear-gradient(180deg, #8B1A1A, #FF6B6B, #FF8E53);
   border-radius: 9999px;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 107, 107, 0.65);
-}
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #A02020, #FF6B6B); }
 
 /* ─── Utility Classes ───────────────────────────────────────────────────── */
 @layer utilities {
+
+  /* Gradient text */
   .gradient-text {
     background: var(--gradient-text);
     -webkit-background-clip: text;
@@ -88,20 +69,19 @@ body {
     color: transparent;
   }
 
+  /* Glass variants */
   .glass-weak {
     background: var(--glass-weak-bg);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 107, 107, 0.12);
   }
-
   .glass-medium {
     background: var(--glass-medium-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 107, 107, 0.22);
   }
-
   .glass-strong {
     background: var(--glass-strong-bg);
     backdrop-filter: blur(24px);
@@ -109,44 +89,130 @@ body {
     border: 1px solid rgba(255, 107, 107, 0.3);
   }
 
+  /* ── Noise texture overlay ─────────────────────────────────────────────── */
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── Shimmer sweep (used on buttons) ───────────────────────────────────── */
+  @keyframes shimmer-sweep {
+    0%   { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(300%)  skewX(-15deg); }
+  }
+  .shimmer-sweep::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    transform: translateX(-100%) skewX(-15deg);
+    pointer-events: none;
+  }
+  .shimmer-sweep:hover::after {
+    animation: shimmer-sweep 0.65s ease forwards;
+  }
+
+  /* ── Gradient underline for headings ───────────────────────────────────── */
+  @keyframes underline-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+  .gradient-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .gradient-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-text);
+    border-radius: 9999px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .gradient-underline.in-view::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Animated grid background ──────────────────────────────────────────── */
   @keyframes grid-drift {
     0%   { transform: translate(0, 0); }
     50%  { transform: translate(-30px, -20px); }
     100% { transform: translate(0, 0); }
   }
+  .animate-grid-drift { animation: grid-drift 20s ease-in-out infinite; }
 
-  .animate-grid-drift {
-    animation: grid-drift 20s ease-in-out infinite;
-  }
-
+  /* ── Marquee ────────────────────────────────────────────────────────────── */
   @keyframes marquee-left {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
-
   @keyframes marquee-right {
     from { transform: translateX(-50%); }
     to   { transform: translateX(0); }
   }
+  .animate-marquee-left  { animation: marquee-left  30s linear infinite; }
+  .animate-marquee-right { animation: marquee-right 30s linear infinite; }
 
-  .animate-marquee-left {
-    animation: marquee-left 30s linear infinite;
+  /* ── Floating badge pulse ───────────────────────────────────────────────── */
+  @keyframes badge-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-6px); }
   }
+  .badge-float { animation: badge-float 4s ease-in-out infinite; }
+  .badge-float-delay { animation: badge-float 4s ease-in-out infinite; animation-delay: 1.5s; }
 
-  .animate-marquee-right {
-    animation: marquee-right 30s linear infinite;
+  /* ── Aurora slow drift ──────────────────────────────────────────────────── */
+  @keyframes aurora-drift {
+    0%   { transform: translate(0, 0)    scale(1);    opacity: 0.6; }
+    33%  { transform: translate(40px, -30px) scale(1.08); opacity: 0.8; }
+    66%  { transform: translate(-20px, 20px) scale(0.95); opacity: 0.5; }
+    100% { transform: translate(0, 0)    scale(1);    opacity: 0.6; }
   }
+  .animate-aurora { animation: aurora-drift 18s ease-in-out infinite; }
+  .animate-aurora-delay { animation: aurora-drift 22s ease-in-out infinite; animation-delay: -6s; }
 
-  /* Light-blue section accent — use on sections to add a ~5% blue radial glow */
-  .blue-accent-bg {
-    position: relative;
+  /* ── Glow pulse for borders ─────────────────────────────────────────────── */
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(255,107,107,0.3); }
+    50%       { box-shadow: 0 0 28px rgba(255,107,107,0.6), 0 0 60px rgba(255,142,83,0.2); }
   }
+  .glow-pulse-border { animation: glow-pulse 3s ease-in-out infinite; }
 
+  /* ── Section blue accent ────────────────────────────────────────────────── */
+  .blue-accent-bg { position: relative; }
   .blue-accent-bg::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(100, 200, 255, 0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(100,200,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Maroon accent — used on section borders & dividers ─────────────────── */
+  .maroon-divider {
+    background: linear-gradient(90deg, transparent, #8B1A1A 30%, #FF6B6B 50%, #8B1A1A 70%, transparent);
+  }
+
+  /* ── Maroon bottom glow — used behind contact/CTA sections ──────────────── */
+  .maroon-glow-bg { position: relative; }
+  .maroon-glow-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(139,26,26,0.10) 0%, transparent 65%);
     pointer-events: none;
     z-index: 0;
   }

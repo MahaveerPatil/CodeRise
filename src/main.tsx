@@ -11,10 +11,13 @@ const LoadingFallback = () => (
   </div>
 );
 
-const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
-const BlogPage = lazy(() => import('./pages/BlogPage'));
-const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
-const AdminPage = lazy(() => import('./pages/AdminPage'));
+const CaseStudyPage    = lazy(() => import('./pages/CaseStudyPage'));
+const BlogPage         = lazy(() => import('./pages/BlogPage'));
+const BlogPostPage     = lazy(() => import('./pages/BlogPostPage'));
+const AdminPage        = lazy(() => import('./pages/AdminPage'));
+const NotFoundPage     = lazy(() => import('./pages/NotFoundPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsPage        = lazy(() => import('./pages/TermsPage'));
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -29,15 +32,8 @@ createRoot(document.getElementById('root')!).render(
             </Suspense>
           }
         />
-        <Route
-          path="/admin/reset-password"
-          element={
-            <Suspense fallback={<LoadingFallback />}>
-              <AdminPage resetMode />
-            </Suspense>
-          }
-        />
-        {/* Main site */}
+
+        {/* Main site — with navbar/footer */}
         <Route path="/" element={<RootLayout />}>
           <Route index element={<HomePage />} />
           <Route
@@ -52,7 +48,19 @@ createRoot(document.getElementById('root')!).render(
             path="blog/:slug"
             element={<Suspense fallback={<LoadingFallback />}><BlogPostPage /></Suspense>}
           />
-          <Route path="*" element={<HomePage />} />
+          <Route
+            path="privacy-policy"
+            element={<Suspense fallback={<LoadingFallback />}><PrivacyPolicyPage /></Suspense>}
+          />
+          <Route
+            path="terms"
+            element={<Suspense fallback={<LoadingFallback />}><TermsPage /></Suspense>}
+          />
+          {/* 404 — must be last */}
+          <Route
+            path="*"
+            element={<Suspense fallback={<LoadingFallback />}><NotFoundPage /></Suspense>}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

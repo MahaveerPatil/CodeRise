@@ -57,7 +57,7 @@ export function ContactSection() {
     <section
       id="contact"
       ref={ref}
-      className="relative py-24 bg-bg-base blue-accent-bg"
+      className="relative py-24 bg-bg-base blue-accent-bg maroon-glow-bg"
       aria-labelledby="contact-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

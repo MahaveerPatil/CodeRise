@@ -22,24 +22,38 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-base"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-base noise-overlay"
       aria-label="Hero section"
     >
-      {/* Backgrounds */}
-      <AnimatedGrid opacity={0.15} className="z-0" />
-      <Suspense fallback={null}>
-        <ParticleField />
-      </Suspense>
-      <GlowOrb color="#FF6B6B" size={800} opacity={0.12} className="top-0 left-1/4 z-0" />
-      <GlowOrb color="#FF8E53" size={600} opacity={0.08} className="bottom-1/4 right-1/4 z-0" />
-      {/* Subtle light-blue accent (~5%) */}
-      <GlowOrb color="#64C8FF" size={700} opacity={0.05} className="top-1/3 right-0 z-0" />
+      {/* Aurora orbs — slow drift */}
+      <div
+        className={`absolute top-[-10%] left-[-5%] w-[700px] h-[700px] rounded-full pointer-events-none z-0 ${reducedMotion ? '' : 'animate-aurora'}`}
+        style={{ background: 'radial-gradient(circle, rgba(255,107,107,0.13) 0%, transparent 65%)' }}
+        aria-hidden="true"
+      />
+      <div
+        className={`absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full pointer-events-none z-0 ${reducedMotion ? '' : 'animate-aurora-delay'}`}
+        style={{ background: 'radial-gradient(circle, rgba(100,200,255,0.09) 0%, transparent 65%)' }}
+        aria-hidden="true"
+      />
 
-      {/* Content */}
+      {/* Grid + particles */}
+      <AnimatedGrid opacity={0.12} className="z-0" />
+      <Suspense fallback={null}><ParticleField /></Suspense>
+      <GlowOrb color="#FF8E53" size={500} opacity={0.07} className="bottom-1/4 right-1/3 z-0" />
+      {/* Maroon accent orb — bottom left */}
+      <div
+        className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(ellipse, rgba(139,26,26,0.12) 0%, transparent 65%)' }}
+        aria-hidden="true"
+      />
+
+      {/* Main content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
         {/* Headline */}
         <motion.h1
-          className="font-display font-bold text-[36px] md:text-[45px] text-text-primary leading-tight mb-6"
+          className="font-display font-bold text-[42px] md:text-[62px] lg:text-[72px] text-text-primary leading-[1.05] tracking-tight mb-6"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
@@ -47,18 +61,20 @@ export function HeroSection() {
         >
           We Build{' '}
           <span className="gradient-text">Technology</span>
+          <br className="hidden sm:block" />
           {' '}That Moves Businesses Forward.
         </motion.h1>
 
         {/* Supporting text */}
         <motion.p
-          className="text-text-secondary text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed"
+          className="text-text-secondary text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          transition={{ delay: reducedMotion ? 0 : 0.6 }}
+          transition={{ delay: reducedMotion ? 0 : 0.5 }}
         >
-          From powerful websites and scalable software to AI and intelligent automation — we turn ambitious ideas into technology that works.
+          From powerful websites and scalable software to AI and intelligent
+          automation — we turn ambitious ideas into technology that works.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -67,33 +83,38 @@ export function HeroSection() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          transition={{ delay: reducedMotion ? 0 : 0.9 }}
+          transition={{ delay: reducedMotion ? 0 : 0.7 }}
         >
-          <Button
-            variant="primary"
-            size="lg"
-            magnetic
-            onClick={() => smoothScroll('contact')}
-          >
-            Start a Project
+          <Button variant="primary" size="lg" magnetic onClick={() => smoothScroll('contact')}>
+            Start a Project →
           </Button>
-          <Button
-            variant="ghost"
-            size="lg"
-            onClick={() => smoothScroll('projects')}
-          >
+          <Button variant="ghost" size="lg" onClick={() => smoothScroll('projects')}>
             Explore Our Work
           </Button>
         </motion.div>
+
+        {/* Trust line */}
+        <motion.div
+          className="flex items-center justify-center gap-3 mt-10 text-text-muted text-xs font-mono"
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: reducedMotion ? 0 : 0.9 }}
+          aria-hidden="true"
+        >
+          <span className="w-8 h-px bg-border-default" />
+          <span>Based in Belagavi · Serving clients worldwide</span>
+          <span className="w-8 h-px bg-border-default" />
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — simple arrow */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         variants={fadeUp}
         initial="hidden"
         animate="visible"
-        transition={{ delay: reducedMotion ? 0 : 1.2 }}
+        transition={{ delay: reducedMotion ? 0 : 1.1 }}
         aria-hidden="true"
       >
         <span className="text-text-muted text-xs tracking-widest uppercase font-mono">Scroll</span>

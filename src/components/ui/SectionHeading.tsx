@@ -1,25 +1,26 @@
+import { useEffect, useRef } from 'react';
 import { cn } from '../../utils/cn';
 
 interface SectionHeadingProps {
-  label?: string;        // Small overline label e.g. "WHAT WE BUILD"
-  title: string;         // Main heading — wrap words in [...] for gradient
-  subtitle?: string;     // Optional subtitle paragraph
+  label?: string;
+  title: string;
+  subtitle?: string;
   align?: 'left' | 'center' | 'right';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
-/**
- * Parses title string for [bracketed] text and renders it with gradient styling.
- * Example: "We Build [Technology] That Works" → "Technology" gets gradient class
- */
-function parseTitle(title: string): React.ReactNode[] {
+function parseTitle(title: string, addUnderline: boolean): React.ReactNode[] {
   const parts = title.split(/(\[.*?\])/g);
   return parts.map((part, i) => {
     if (part.startsWith('[') && part.endsWith(']')) {
+      const text = part.slice(1, -1);
       return (
-        <span key={i} className="gradient-text">
-          {part.slice(1, -1)}
+        <span
+          key={i}
+          className={cn('gradient-text', addUnderline && 'gradient-underline in-view')}
+        >
+          {text}
         </span>
       );
     }
@@ -35,10 +36,34 @@ export function SectionHeading({
   size = 'md',
   className,
 }: SectionHeadingProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const hasGradient = /\[.*?\]/.test(title);
+
+  // Trigger gradient underline when heading scrolls into view
+  useEffect(() => {
+    if (!hasGradient || !ref.current) return;
+    const spans = ref.current.querySelectorAll<HTMLSpanElement>('.gradient-underline');
+    if (!spans.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            spans.forEach((s) => s.classList.add('in-view'));
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasGradient]);
+
   const alignClass = {
-    left: 'text-left items-start',
+    left:   'text-left  items-start',
     center: 'text-center items-center',
-    right: 'text-right items-end',
+    right:  'text-right  items-end',
   }[align];
 
   const titleSize = {
@@ -48,7 +73,7 @@ export function SectionHeading({
   }[size];
 
   return (
-    <div className={cn('flex flex-col gap-4', alignClass, className)}>
+    <div ref={ref} className={cn('flex flex-col gap-4', alignClass, className)}>
       {label && (
         <span className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-widest uppercase text-brand-primary">
           <span className="w-6 h-px bg-brand-primary" aria-hidden="true" />
@@ -56,13 +81,8 @@ export function SectionHeading({
           <span className="w-6 h-px bg-brand-primary" aria-hidden="true" />
         </span>
       )}
-      <h2
-        className={cn(
-          'font-display font-bold text-text-primary leading-tight',
-          titleSize
-        )}
-      >
-        {parseTitle(title)}
+      <h2 className={cn('font-display font-bold text-text-primary leading-tight', titleSize)}>
+        {parseTitle(title, hasGradient)}
       </h2>
       {subtitle && (
         <p className="text-text-secondary text-lg max-w-2xl leading-relaxed">

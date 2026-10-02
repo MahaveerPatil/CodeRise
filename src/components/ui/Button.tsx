@@ -22,7 +22,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary text-white shadow-glow hover:shadow-glow-strong hover:scale-[1.02] active:scale-[0.98]',
+    // Shimmer sweep via shimmer-sweep utility class
+    'relative overflow-hidden shimmer-sweep bg-gradient-to-r from-brand-primary via-brand-accent to-brand-secondary text-white shadow-glow hover:shadow-glow-strong hover:scale-[1.03] active:scale-[0.97] transition-transform',
   ghost:
     'bg-transparent border border-border-default text-text-primary hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5',
   outline:
@@ -38,26 +39,9 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 const Spinner = () => (
-  <svg
-    className="w-4 h-4 animate-spin"
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    aria-hidden="true"
-  >
-    <circle
-      className="opacity-25"
-      cx="12"
-      cy="12"
-      r="10"
-      stroke="currentColor"
-      strokeWidth="4"
-    />
-    <path
-      className="opacity-75"
-      fill="currentColor"
-      d="M4 12a8 8 0 018-8v8H4z"
-    />
+  <svg className="w-4 h-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
   </svg>
 );
 
@@ -76,25 +60,15 @@ export function Button({
   rel,
   ...props
 }: ButtonProps) {
-  // Separate refs for button and anchor to avoid dual-type casting issues.
   const buttonRef = useRef<HTMLButtonElement>(null);
   const anchorRef = useRef<HTMLAnchorElement>(null);
-
-  // Hook must always be called; pass strength=0 when magnetic is off so the
-  // effect is inert. The hook itself already skips on coarse-pointer devices.
   const magneticStrength = magnetic ? 0.3 : 0;
 
-  const { x: bx, y: by } = useMagneticEffect(
-    buttonRef as React.RefObject<HTMLElement>,
-    { strength: magneticStrength, max: 12 }
-  );
-  const { x: ax, y: ay } = useMagneticEffect(
-    anchorRef as React.RefObject<HTMLElement>,
-    { strength: magneticStrength, max: 12 }
-  );
+  const { x: bx, y: by } = useMagneticEffect(buttonRef as React.RefObject<HTMLElement>, { strength: magneticStrength, max: 12 });
+  const { x: ax, y: ay } = useMagneticEffect(anchorRef as React.RefObject<HTMLElement>, { strength: magneticStrength, max: 12 });
 
   const baseClasses = cn(
-    'inline-flex items-center justify-center gap-2 rounded-lg font-medium',
+    'inline-flex items-center justify-center gap-2 rounded-xl font-semibold',
     'transition-all duration-200 ease-out',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base',
     'select-none cursor-pointer',

@@ -18,13 +18,23 @@ export function RootLayout() {
   const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
+    // Hide loading screen once the page is fully loaded, with a minimum of 600ms
+    // so it doesn't flash on fast connections
+    const minDelay = new Promise<void>(res => setTimeout(res, 600));
+    const onLoad = new Promise<void>(res => {
+      if (document.readyState === 'complete') res();
+      else window.addEventListener('load', () => res(), { once: true });
+    });
+    Promise.all([minDelay, onLoad]).then(() => setLoading(false));
   }, []);
 
   const handleNavClick = (href: string) => {
+    // Real route (e.g. /blog)
+    if (href.startsWith('/')) {
+      window.location.href = href;
+      return;
+    }
     const id = href.replace('#', '');
-    // If not on home page, navigate home first then scroll
     if (location.pathname !== '/') {
       window.location.href = `/${href}`;
       return;
